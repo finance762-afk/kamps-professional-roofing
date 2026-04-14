@@ -26,16 +26,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-.inner-hero {
-  position: relative;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  padding-top: 80px;
-}
-.inner-hero .hero-content { text-align: left; max-width: 700px; }
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -121,7 +111,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
 <!-- Hero — CTA #1 -->
-<section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-481265221_122142156344552346_6793435103332492994_n.jpg');">
+<section class="hero hero-inner" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-481265221_122142156344552346_6793435103332492994_n.jpg');">
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
@@ -279,11 +269,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 </section>
 
 <!-- Closing CTA — CTA #3 -->
-<section style="background: var(--color-dark); padding: 5rem 0;">
-  <div class="container" style="text-align: center;">
-    <h2 style="color: white; margin-bottom: 1rem;">New Gutters Are a 25-Year Investment in Your Home's Foundation</h2>
-    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">Get them sized correctly, sloped properly, and hung into sound fascia. Call Kamps for a free estimate and walk away knowing exactly what the project will cost.</p>
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+<section class="closing-cta">
+  <div class="container">
+    <h2>New Gutters Are a 25-Year Investment in Your Home's Foundation</h2>
+    <p>Get them sized correctly, sloped properly, and hung into sound fascia. Call Kamps for a free estimate and walk away knowing exactly what the project will cost.</p>
+    <div class="btn-row">
       <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
       <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
     </div>

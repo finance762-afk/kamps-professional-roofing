@@ -28,25 +28,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <style>
 /* ── Contact — Page-specific styles ──────────────────────── */
-.inner-hero {
-  position: relative;
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  padding-top: 80px;
-}
-.inner-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(26,43,60,0.88) 0%, rgba(26,43,60,0.55) 60%, rgba(6,182,212,0.15) 100%);
-  z-index: 1;
-}
-.inner-hero .container { position: relative; z-index: 2; }
-.inner-hero .hero-content { text-align: left; max-width: 700px; }
-
 .breadcrumb-nav {
   background: var(--color-light);
   padding: 0.75rem 0;
@@ -295,35 +276,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   max-width: 65ch;
 }
 
-/* ── Closing CTA ───────────────────────────────────────────── */
-.closing-cta {
-  background: var(--color-dark);
-  padding: 5rem 0;
-  text-align: center;
-}
-.closing-cta h2 {
-  font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 800;
-  color: white;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-}
-.closing-cta p {
-  color: rgba(255,255,255,0.7);
-  font-size: 1.05rem;
-  max-width: 540px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-}
 </style>
 
 <main id="main-content">
 
   <!-- ── Inner Hero ─────────────────────────────────────────── -->
-  <section class="inner-hero"
+  <section class="hero hero-inner"
     style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914928-504418539_122166753074552346_1599975162091961710_n.jpg');"
     aria-label="Contact page hero">
+    <div class="hero-overlay" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-content">
         <span class="eyebrow" style="margin-bottom:1rem;display:inline-block;">No Obligation</span>
