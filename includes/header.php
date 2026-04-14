@@ -124,11 +124,80 @@ $currentPage ??= '';
               <a href="/about" <?php echo aria_current($currentPage, 'about'); ?>>About</a>
             </li>
 
-            <li>
-              <a href="/service-areas" <?php echo aria_current($currentPage, 'service-areas'); ?>>
+            <!-- Service Areas dropdown ──────────────────────── -->
+            <li class="nav-dropdown">
+              <a href="/service-areas"
+                 <?php echo aria_current($currentPage, 'service-areas'); ?>
+                 aria-haspopup="true"
+                 aria-expanded="false"
+                 class="nav-dropdown-trigger">
                 Service Areas
+                <svg class="dropdown-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
               </a>
-            </li>
+
+              <ul class="nav-dropdown-menu" role="menu" aria-label="Service Areas submenu">
+
+                <li role="menuitem">
+                  <a href="/service-areas#grand-rapids">Grand Rapids</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#kentwood">Kentwood</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#wyoming">Wyoming</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#grandville">Grandville</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#rockford">Rockford</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#lowell">Lowell</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#comstock-park">Comstock Park</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#ada">Ada</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#byron-center">Byron Center</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#caledonia">Caledonia</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#jenison">Jenison</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#hudsonville">Hudsonville</a>
+                </li>
+                <li role="menuitem">
+                  <a href="/service-areas#holland">Holland</a>
+                </li>
+
+                <li class="nav-dropdown-divider" role="separator"></li>
+                <li role="menuitem">
+                  <a href="/service-areas" class="nav-dropdown-all">
+                    View All Areas
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </a>
+                </li>
+
+              </ul>
+            </li><!-- /service-areas dropdown -->
 
             <li>
               <a href="/contact" <?php echo aria_current($currentPage, 'contact'); ?>>Contact</a>

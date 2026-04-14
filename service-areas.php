@@ -377,7 +377,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         </div>
         <div class="gr-feature-content">
           <span class="eyebrow">Primary Service Area</span>
-          <h2 id="gr-heading">Grand Rapids, MI</h2>
+          <h2 id="grand-rapids">Grand Rapids, MI</h2>
           <p>Grand Rapids is where Kamps Professional Roofing was built — literally. Daniel started his roofing career working on homes in this city in the early 1990s, and Grand Rapids still makes up the majority of Kamps' annual project volume. If you're a Grand Rapids homeowner, you're in the area Daniel knows roof by roof.</p>
           <p>The neighborhoods Kamps serves most frequently in Grand Rapids include Eastown, Heritage Hill, Forest Hills, Cascade, Knapp's Corner, and the Northeast Side. Whether your home was built in 1910 or 2010, Daniel has seen its roof type before and knows what it takes to do the job right.</p>
           <div>
@@ -426,7 +426,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
       <div class="areas-grid">
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="kentwood" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Kentwood, MI
@@ -435,7 +435,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Kentwood →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="wyoming" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Wyoming, MI
@@ -444,7 +444,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Wyoming →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="grandville" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Grandville, MI
@@ -453,7 +453,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Grandville →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="rockford" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Rockford, MI
@@ -462,7 +462,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Rockford →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="lowell" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Lowell, MI
@@ -471,7 +471,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Lowell →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="comstock-park" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Comstock Park, MI
@@ -480,7 +480,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Comstock Park →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="ada" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Ada, MI
@@ -489,7 +489,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Ada →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="byron-center" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Byron Center, MI
@@ -498,7 +498,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Byron Center →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="caledonia" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Caledonia, MI
@@ -507,7 +507,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Caledonia →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="jenison" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Jenison, MI
@@ -516,7 +516,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Jenison →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="hudsonville" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Hudsonville, MI
@@ -525,7 +525,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <a href="/services">View services for Hudsonville →</a>
         </div>
 
-        <div class="area-card" data-animate>
+        <div class="area-card" id="holland" data-animate>
           <h3>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             Holland, MI
