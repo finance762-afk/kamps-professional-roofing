@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
-$pageTitle       = 'Storm Damage Roof Repair Grand Rapids MI | Kamps';
+$pageTitle       = 'Storm Damage Roof Repair Grand Rapids MI | Kamps Roofing';
 $pageDescription = 'Hail, wind, or fallen debris damage your roof in Grand Rapids? Kamps provides free storm inspections, works directly with insurance adjusters, and handles full restoration across West Michigan.';
 $pageKeywords    = 'storm damage roof repair grand rapids, hail damage roof repair michigan, wind damage roof repair kent county, weather damage restoration grand rapids';
 $canonicalUrl    = SITE_URL . '/services/storm-damage-roof-repair';

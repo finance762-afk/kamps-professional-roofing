@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
-$pageTitle       = 'Siding Repair Grand Rapids MI | Kamps Roofing';
+$pageTitle       = 'Siding Repair Grand Rapids MI | Kamps Professional Roofing';
 $pageDescription = 'Siding repair in Grand Rapids, MI. Hail damage, cracked panels, warped sections, and wind damage repaired. $200–$1,200 for most repairs. Insurance documentation available. Free estimates.';
 $pageKeywords    = 'siding repair grand rapids, fix home siding mi, damaged siding repair grand rapids, storm damage siding repair';
 $canonicalUrl    = SITE_URL . '/services/siding-repair';

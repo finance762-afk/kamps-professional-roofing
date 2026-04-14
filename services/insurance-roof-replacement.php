@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Insurance Roof Replacement', 'url' => '/services/insurance-roof-replacement'],
 ];
 
-$pageTitle       = "Insurance Roof Replacement Grand Rapids MI | Storm Damage Claims | Kamps";
+$pageTitle       = "Insurance Roof Replacement Grand Rapids MI | Kamps Roofing";
 $pageDescription = "Daniel Kamps guides Grand Rapids homeowners through insurance roof replacement claims — documentation, adjuster meetings, and full approved scope. No out-of-pocket beyond deductible. Free inspection.";
 $pageKeywords    = "insurance roof replacement grand rapids, roofing insurance claims mi, storm restoration roofing grand rapids, insurance claim assistance kent county, hail damage roof replacement west michigan";
 $canonicalUrl    = SITE_URL . '/services/insurance-roof-replacement';

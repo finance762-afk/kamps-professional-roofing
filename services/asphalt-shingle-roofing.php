@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Asphalt Shingle Roofing', 'url' => '/services/asphalt-shingle-roofing'],
 ];
 
-$pageTitle       = "Asphalt Shingle Roofing Grand Rapids MI | Kamps Professional Roofing";
+$pageTitle       = "Asphalt Shingle Roofing Grand Rapids MI | Kamps Roofing";
 $pageDescription = "Expert asphalt shingle roof installation and replacement in Grand Rapids, MI. Architectural & 3-tab shingles from GAF, Owens Corning, CertainTeed. Free estimates — Daniel Kamps, 30+ years.";
 $pageKeywords    = "asphalt shingle roofing grand rapids, shingle roof installation mi, architectural shingles grand rapids, composite roofing shingles grand rapids, roof replacement grand rapids mi";
 $canonicalUrl    = SITE_URL . '/services/asphalt-shingle-roofing';

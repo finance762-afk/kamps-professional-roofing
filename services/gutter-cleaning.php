@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
-$pageTitle       = 'Gutter Cleaning Grand Rapids MI | Kamps Roofing';
+$pageTitle       = 'Gutter Cleaning Grand Rapids MI | Kamps Professional Roofing';
 $pageDescription = 'Professional gutter cleaning in Grand Rapids, MI. Hand-clearing, downspout flush, and damage report. $100–$300 for most homes. Spring and fall scheduling available.';
 $pageKeywords    = 'gutter cleaning grand rapids, gutter cleaning services mi, professional gutter cleaning grand rapids, seasonal gutter maintenance';
 $canonicalUrl    = SITE_URL . '/services/gutter-cleaning';

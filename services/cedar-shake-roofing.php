@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Cedar Shake Roofing', 'url' => '/services/cedar-shake-roofing'],
 ];
 
-$pageTitle       = "Cedar Shake Roofing Grand Rapids MI | Wood Shake Installation | Kamps";
+$pageTitle       = "Cedar Shake Roofing Grand Rapids MI | Kamps Roofing";
 $pageDescription = "Cedar shake roof installation in Grand Rapids, MI. Western red cedar with proper Michigan moisture management — breathable underlayment, correct spacing, honest maintenance guidance. Free estimates.";
 $pageKeywords    = "cedar shake roof grand rapids, wood shake roofing mi, cedar shingle installation grand rapids, natural wood roofing kent county, cedar roof replacement west michigan";
 $canonicalUrl    = SITE_URL . '/services/cedar-shake-roofing';

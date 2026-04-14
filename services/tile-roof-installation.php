@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Tile Roof Installation', 'url' => '/services/tile-roof-installation'],
 ];
 
-$pageTitle       = "Tile Roof Installation Grand Rapids MI | Clay & Concrete Tile | Kamps";
+$pageTitle       = "Tile Roof Installation Grand Rapids MI | Kamps Roofing";
 $pageDescription = "Clay and concrete tile roof installation in Grand Rapids, MI. 50+ year lifespans with proper structural prep for Michigan's freeze-thaw climate. Free estimates — Daniel Kamps.";
 $pageKeywords    = "tile roof installation grand rapids, clay tile roofing mi, concrete tile roof grand rapids, residential tile roofing kent county, tile roof replacement west michigan";
 $canonicalUrl    = SITE_URL . '/services/tile-roof-installation';

@@ -6,7 +6,7 @@
  */
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
-$pageTitle       = "Contact Kamps Professional Roofing | Free Estimate Grand Rapids";
+$pageTitle       = "Contact Kamps Roofing | Free Roofing Estimate Grand Rapids MI";
 $pageDescription = "Contact Kamps Professional Roofing in Grand Rapids, MI for a free roofing estimate. Call, email, or fill out our online form. Same-week appointments available.";
 $pageKeywords    = "contact kamps professional roofing, free roofing estimate grand rapids mi, roofing estimate grand rapids, roof inspection grand rapids";
 $canonicalUrl    = SITE_URL . '/contact';

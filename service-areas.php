@@ -11,7 +11,7 @@ $pageDescription = "Kamps Professional Roofing serves Grand Rapids and all of We
 $pageKeywords    = "roofing service area grand rapids mi, west michigan roofing contractor, kentwood roofing, wyoming mi roofer, rockford mi roofing, grandville roofing";
 $canonicalUrl    = SITE_URL . '/service-areas';
 $ogImage         = "https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914924-2022-05-22.webp";
-$currentPage     = "service-area";
+$currentPage     = "service-areas";
 $heroImage       = "https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914924-2022-05-22.webp";
 
 $breadcrumbs = [

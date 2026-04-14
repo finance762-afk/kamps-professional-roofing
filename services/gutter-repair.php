@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 
-$pageTitle       = 'Gutter Repair Grand Rapids MI | Kamps Roofing';
+$pageTitle       = 'Gutter Repair Grand Rapids MI | Kamps Professional Roofing';
 $pageDescription = 'Professional gutter repair in Grand Rapids, MI. Sagging gutters, leaking seams, disconnected downspouts — most repairs $100–$400. Same-week appointments. Free estimates.';
 $pageKeywords    = 'gutter repair grand rapids, fix gutters grand rapids mi, gutter maintenance grand rapids, emergency gutter repair';
 $canonicalUrl    = SITE_URL . '/services/gutter-repair';

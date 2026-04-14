@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Slate Roof Installation', 'url' => '/services/slate-roof-installation'],
 ];
 
-$pageTitle       = "Slate Roof Installation Grand Rapids MI | Natural Slate Roofing | Kamps";
+$pageTitle       = "Slate Roof Installation Grand Rapids MI | Kamps Roofing";
 $pageDescription = "Natural slate roof installation in Grand Rapids, MI. 75–150 year lifespans — the most durable roofing material available. Structural assessments included. Free estimates from Daniel Kamps.";
 $pageKeywords    = "slate roof installation grand rapids mi, natural slate roofing grand rapids, premium slate roof grand rapids, luxury roofing materials michigan, slate roof replacement west michigan";
 $canonicalUrl    = SITE_URL . '/services/slate-roof-installation';

@@ -13,7 +13,7 @@ $breadcrumbs = [
     ['name' => 'Metal Roofing', 'url' => '/services/metal-roofing'],
 ];
 
-$pageTitle       = "Metal Roofing Grand Rapids MI | Standing Seam & Steel Roofs | Kamps";
+$pageTitle       = "Metal Roofing Grand Rapids MI | Kamps Professional Roofing";
 $pageDescription = "Standing seam and steel metal roofing installation in Grand Rapids, MI. Lasts 40–70 years, sheds Michigan snow naturally. Free estimates from Daniel Kamps — 30+ years experience.";
 $pageKeywords    = "metal roofing grand rapids mi, standing seam metal roof grand rapids, residential metal roofing grand rapids, steel roof installation kent county, metal roof replacement west michigan";
 $canonicalUrl    = SITE_URL . '/services/metal-roofing';
