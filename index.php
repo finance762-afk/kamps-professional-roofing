@@ -227,6 +227,33 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   align-self: flex-start;
 }
 
+/* Wide card — spans full grid width */
+.service-card-wide {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-primary) 100%);
+  color: var(--color-white);
+  border-top-color: var(--color-accent);
+}
+.service-card-wide .service-card-icon {
+  background: var(--color-accent);
+  color: var(--color-white);
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  font-size: var(--font-size-2xl);
+}
+.service-card-wide h3 { color: var(--color-white); margin-bottom: var(--space-2); }
+.service-card-wide p { color: rgba(255,255,255,0.82); margin-bottom: 0; flex: 1; }
+.service-card-wide .learn-more { color: var(--color-accent); font-weight: 700; white-space: nowrap; }
+.service-card-wide:hover { border-top-color: var(--color-accent); }
+@media (max-width: 767px) {
+  .service-card-wide { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+  .service-card-wide p { margin-bottom: var(--space-4); }
+}
+
 /* Standard cards */
 .service-card:hover .learn-more { color: var(--color-accent); }
 .learn-more {
@@ -262,11 +289,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 /* ── About / Process ───────────────────────────────────────────── */
 .about-section { background: var(--color-white); }
-.about-split {
+.about-top {
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: var(--space-12);
   align-items: start;
+  margin-bottom: var(--space-12);
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
 }
 .about-eyebrow {
   display: inline-block;
@@ -459,7 +492,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 @media (max-width: 767px) {
   .services-grid-asym { grid-template-columns: 1fr; }
   .service-card-featured { grid-column: span 1; }
-  .about-split { grid-template-columns: 1fr; }
+  .about-top { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
   .about-image-wrap { padding-right: 0; padding-bottom: var(--space-12); }
   .about-stat-card { right: var(--space-4); }
   .section-number { display: none; }
@@ -792,8 +826,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         </a>
       </article>
 
-      <!-- ── Card: Emergency Repair ── -->
-      <article class="service-card" data-animate>
+      <!-- ── Card: Emergency Repair (full-width) ── -->
+      <article class="service-card service-card-wide" data-animate>
         <div class="service-card-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
                fill="none" stroke="currentColor" stroke-width="2"
@@ -893,9 +927,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   <span class="section-number" aria-hidden="true">02</span>
   <div class="container">
 
-    <div class="about-split">
+    <div class="about-top">
 
-      <!-- Left: Story + Process Steps -->
+      <!-- Left: Story copy -->
       <div class="about-content" data-animate>
         <span class="about-eyebrow">The Kamps Difference</span>
         <h2 class="about-h2" id="about-heading">Three Decades Behind Every Estimate</h2>
@@ -903,49 +937,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <p class="about-body">Daniel Kamps started in roofing the same way most Grand Rapids homeowners start shopping for one &mdash; he needed an honest contractor and couldn&rsquo;t find one. So he became one. Over 30 years later, Kamps Professional Roofing runs on a principle that hasn&rsquo;t changed: show up when you say you will, do the work right the first time, and don&rsquo;t leave until the homeowner is satisfied.</p>
 
         <p class="about-body">We serve all of West Michigan &mdash; from the lakeshore communities through Rockford, Lowell, Grandville, and beyond. We specialize in residential roofing across every material type, and we handle insurance claim negotiations directly with your adjuster, so you&rsquo;re not navigating that process alone.</p>
-
-        <!-- Process Steps -->
-        <div class="process-steps">
-          <p class="process-steps-label">How Every Job Works</p>
-
-          <div class="process-step">
-            <div class="step-number" aria-hidden="true">1</div>
-            <div class="step-content">
-              <p class="step-title">Inspect</p>
-              <p class="step-desc">Free, no-pressure roof inspection &mdash; we get on the roof ourselves, document every issue, and give you a clear picture of your roof&rsquo;s actual condition. No estimates from the driveway.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
-            <div class="step-number" aria-hidden="true">2</div>
-            <div class="step-content">
-              <p class="step-title">Estimate</p>
-              <p class="step-desc">Transparent, itemized estimate within 24 hours. We explain the materials, the full scope of work, and your options &mdash; so you understand exactly what you&rsquo;re agreeing to before a single nail is pulled.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
-            <div class="step-number" aria-hidden="true">3</div>
-            <div class="step-content">
-              <p class="step-title">Install</p>
-              <p class="step-desc">Our crew works efficiently and cleanly. Most residential roofs are completed in a single day, with a magnetic sweep for nails and full debris removal before we pack up.</p>
-            </div>
-          </div>
-
-          <div class="process-step">
-            <div class="step-number" aria-hidden="true">4</div>
-            <div class="step-content">
-              <p class="step-title">Walkthrough</p>
-              <p class="step-desc">Before we leave, Daniel personally walks the completed job with you to verify every detail meets our standard. Your satisfaction is confirmed on-site, not assumed after the fact.</p>
-            </div>
-          </div>
-
-        </div><!-- /.process-steps -->
-
-        <div style="margin-top:var(--space-8);">
-          <a href="/about" class="btn btn-primary">Meet the Kamps Team</a>
-        </div>
-
       </div><!-- /.about-content -->
 
       <!-- Right: Photo + Stat Card Overlay -->
@@ -969,7 +960,50 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         </div>
       </div>
 
-    </div><!-- /.about-split -->
+    </div><!-- /.about-top -->
+
+    <!-- Process Steps — 2-column grid -->
+    <div class="process-steps" data-animate>
+      <p class="process-steps-label">How Every Job Works</p>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number" aria-hidden="true">1</div>
+          <div class="step-content">
+            <p class="step-title">Inspect</p>
+            <p class="step-desc">Free, no-pressure roof inspection &mdash; we get on the roof ourselves, document every issue, and give you a clear picture of your roof&rsquo;s actual condition. No estimates from the driveway.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number" aria-hidden="true">2</div>
+          <div class="step-content">
+            <p class="step-title">Estimate</p>
+            <p class="step-desc">Transparent, itemized estimate within 24 hours. We explain the materials, the full scope of work, and your options &mdash; so you understand exactly what you&rsquo;re agreeing to before a single nail is pulled.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number" aria-hidden="true">3</div>
+          <div class="step-content">
+            <p class="step-title">Install</p>
+            <p class="step-desc">Our crew works efficiently and cleanly. Most residential roofs are completed in a single day, with a magnetic sweep for nails and full debris removal before we pack up.</p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number" aria-hidden="true">4</div>
+          <div class="step-content">
+            <p class="step-title">Walkthrough</p>
+            <p class="step-desc">Before we leave, Daniel personally walks the completed job with you to verify every detail meets our standard. Your satisfaction is confirmed on-site, not assumed after the fact.</p>
+          </div>
+        </div>
+      </div><!-- /.process-grid -->
+
+      <div style="margin-top:var(--space-8);">
+        <a href="/about" class="btn btn-primary">Meet the Kamps Team</a>
+      </div>
+    </div><!-- /.process-steps -->
 
   </div>
 </section>

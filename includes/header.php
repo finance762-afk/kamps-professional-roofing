@@ -221,14 +221,14 @@ $currentPage ??= '';
 
     /* Desktop phone in header */
     .header-phone {
-      color: rgba(255,255,255,0.85);
+      color: var(--color-primary);
       font-family: var(--font-heading);
       font-size: var(--font-size-sm);
       font-weight: 600;
       margin-right: var(--space-4);
       white-space: nowrap;
     }
-    .header-phone:hover { color: var(--color-white); opacity: 1; }
+    .header-phone:hover { color: var(--color-accent); }
 
     /* Mobile menu: expand dropdown items inline ──────────────── */
     @media (max-width: 768px) {
