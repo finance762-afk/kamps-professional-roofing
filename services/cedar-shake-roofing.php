@@ -41,11 +41,6 @@ $schemaMarkup = '[' . breadcrumb_schema($breadcrumbs) . ',' . service_schema(
         ],
         [
             '@type'          => 'Question',
-            'name'           => 'What\'s the fire risk with cedar shake?',
-            'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Untreated cedar is a Class C fire rating. Fire-treated cedar shake (Class A) is available and recommended for homes in some HOA communities or where insurance requires it. Kamps confirms your insurance and HOA requirements before installation so there are no surprises.'],
-        ],
-        [
-            '@type'          => 'Question',
             'name'           => 'How much does cedar shake roofing cost in Grand Rapids?',
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Cedar shake roofing in Grand Rapids typically runs $10,000–$22,000 for residential installation. Cedar grade, shake style (hand-split vs. sawn), and roof complexity affect cost. A detailed, itemized estimate is provided after Daniel inspects your roof.'],
         ],
@@ -57,439 +52,271 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-/* ── Page-specific styles ─────────────────────────────────────────── */
 .inner-hero {
-    position: relative;
-    min-height: 55vh;
-    display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    padding-top: 80px;
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
 }
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav {
-    background: var(--color-light);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-gray-light);
-}
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    font-size: 0.875rem;
-}
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-
 .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .process-step {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .process-number {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 }
+.process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
+.process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
 .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .why-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .why-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
-.cedar-benefits {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: var(--space-10);
+.why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
+.why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
-.benefit-card {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    border-top: 3px solid var(--color-accent);
-}
-.benefit-card .benefit-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    margin: 0 auto var(--space-4);
-}
-.faq-grid { display: grid; gap: 1rem; }
 .faq-item {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
 }
-.faq-question {
-    padding: 1.25rem 1.5rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
+.faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
 }
-.faq-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-top: 1px;
-}
-.faq-answer {
-    padding: 0 1.5rem 1.25rem 3.75rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-text-light);
-}
-.closing-cta {
-    background: var(--color-dark);
-    padding: var(--space-16) 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.closing-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.06;
-    pointer-events: none;
-}
-@media (max-width: 768px) {
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .cedar-benefits { grid-template-columns: 1fr; }
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-    .process-grid { grid-template-columns: 1fr; }
-    .cedar-benefits { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
 }
 </style>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────── -->
-<section class="inner-hero hero-overlay"
-         style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470067945_122125377158552346_4518004843740215702_n.jpg');"
-         aria-label="Cedar shake roofing service hero">
-    <div class="container">
-        <div class="hero-content">
-            <p class="hero-eyebrow eyebrow" data-animate="fade-up">Natural Roofing Materials</p>
-            <h1 data-animate="fade-up">Cedar Shake Roofing<br><span style="color: var(--color-accent);">Grand Rapids, MI</span></h1>
-            <p class="hero-subtitle" data-animate="fade-up">
-                Western red cedar installed for Michigan's moisture-heavy climate — breathable underlayment, proper spacing, and honest guidance on what cedar ownership requires.
-            </p>
-            <div class="hero-buttons" data-animate="fade-up">
-                <a href="/contact" class="btn btn-accent btn-lg magnetic">Get a Free Cedar Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <div class="hero-trust" data-animate="fade-up">
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Licensed &amp; Insured
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    20–30 Year Lifespan
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Breathable Install Systems
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Breadcrumb ───────────────────────────────────────────────────── -->
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- ── Ticker Strip ─────────────────────────────────────────────────── -->
-<div class="ticker-strip" aria-hidden="true">
-    <div class="ticker-track">
-        <span>Western Red Cedar</span><span class="ticker-sep">✦</span>
-        <span>Hand-Split &amp; Sawn Shakes</span><span class="ticker-sep">✦</span>
-        <span>Breathable Underlayment</span><span class="ticker-sep">✦</span>
-        <span>Natural Insulation</span><span class="ticker-sep">✦</span>
-        <span>20–30 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Fire-Treated Options</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <!-- duplicate for seamless loop -->
-        <span>Western Red Cedar</span><span class="ticker-sep">✦</span>
-        <span>Hand-Split &amp; Sawn Shakes</span><span class="ticker-sep">✦</span>
-        <span>Breathable Underlayment</span><span class="ticker-sep">✦</span>
-        <span>Natural Insulation</span><span class="ticker-sep">✦</span>
-        <span>20–30 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Fire-Treated Options</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
+<!-- Hero — CTA #1 -->
+<section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470067945_122125377158552346_4518004843740215702_n.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kamps Professional Roofing</span>
+      <h1>Cedar Shake Roofing Grand Rapids, MI</h1>
+      <p class="hero-subtitle">Western red cedar installed for Michigan's moisture-heavy climate — breathable underlayment, proper spacing, and honest guidance on what cedar ownership requires.</p>
+      <div class="hero-buttons">
+        <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
+        <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Service Detail -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="about-split" data-animate>
+      <div class="about-content">
+        <div class="section-header" style="text-align:left; margin-bottom: 2rem;">
+          <span class="eyebrow">Cedar Shake Roofing in Grand Rapids</span>
+          <h2>The Look Homeowners Want — Installed for Michigan's Climate</h2>
+        </div>
+        <p>Cedar shake is one of the most aesthetically desirable roofing materials available. Western red cedar has a natural warmth, a rustic texture that improves with age, and genuine thermal properties — it insulates roughly twice as effectively as asphalt shingles. A cedar shake roof on a Grand Rapids home costs $10,000–$22,000 and lasts 20–30 years with proper maintenance. Cedar grade (No. 1 Handsplit, Blue Label) and shake style (hand-split vs. sawn vs. tapersplit) affect both appearance and cost, and Daniel walks you through each option during the estimate.</p>
+        <p>The honest challenge with cedar in West Michigan: moisture is its adversary, and this region has plenty of it. Most cedar roofs that fail early weren't installed with Michigan's humidity and rainfall in mind. The critical factors are breathable underlayment — not standard 15# felt, which traps moisture under cedar and accelerates rot — proper shake spacing for air circulation, and adequate attic ventilation. These details add a few hours to installation but add years to lifespan.</p>
+        <p>Daniel Kamps is direct about cedar maintenance requirements before any project begins. Cedar benefits from moss and algae cleaning every 5–7 years and a preservative treatment to prevent rot. Neglected cedar shortens to 10–15 years; properly maintained cedar reaches 25–30. If you want a completely hands-off roof, he'll tell you that and point you toward metal or architectural shingles instead. Hand-split cedar shakes also have natural interlocking properties and significant weight, giving them strong wind resistance in West Michigan weather systems.</p>
+        <p>Fire-treated Class A cedar shake is available and sometimes required by HOAs or insurance carriers in the Grand Rapids area. Kamps confirms your requirements before ordering material — there are no surprises after the cedar is on the roof. Stainless steel or hot-dipped galvanized fasteners are used on every cedar job, because standard galvanized nails corrode under cedar's natural oils and Michigan's humidity, causing unsightly rust staining and premature fastener failure.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
+      </div>
+      <div class="about-image">
+        <picture>
+          <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470067945_122125377158552346_4518004843740215702_n.jpg" alt="Cedar shake roof installation on Grand Rapids Michigan home by Kamps Professional Roofing" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Kamps -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Why Kamps</span>
+      <h2>Cedar Installation Built for West Michigan's Humidity</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div>
+          <h3>Breathable Installation Systems</h3>
+          <p>Kamps uses breathable underlayment on every cedar job — not standard felt. This is the single most important factor in cedar longevity in Michigan's climate. It adds cost to the job and years to the roof.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div>
+          <h3>Honest About Maintenance</h3>
+          <p>Cedar needs cleaning and preservative treatment every 5–7 years. Daniel explains this during the estimate — if low-maintenance is the priority, he'll say so and recommend alternatives. No surprises after the sale.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div>
+          <h3>Correct Fastener Specification</h3>
+          <p>Standard galvanized fasteners corrode under cedar's natural oils and Michigan's humidity. Kamps uses only stainless steel or hot-dipped galvanized fasteners — preventing rust staining and fastener failure.</p>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+        <div>
+          <h3>Fire Treatment Confirmation</h3>
+          <p>Before ordering cedar material, Kamps confirms HOA requirements and insurance specifications. Fire-treated Class A shake is available and sometimes required — confirmed upfront, not discovered after installation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid-page CTA — CTA #2 -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Get an Honest Cedar Shake Estimate — No Surprises</h2>
+    <p>Daniel explains cedar's maintenance requirements upfront so you know exactly what you're committing to before signing anything. Free estimates across Grand Rapids and Kent County.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Get My Free Estimate</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
+    </div>
+  </div>
 </div>
 
-<!-- ── Intro / Answer Block ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="split" style="align-items: center; gap: var(--space-12);">
-
-            <div data-animate="fade-up">
-                <p class="eyebrow">Cedar Shake Roofing in Grand Rapids</p>
-                <h2>The Look Homeowners Want — Installed for Michigan's Climate</h2>
-                <div class="prose" style="margin-top: var(--space-6);">
-                    <p>Cedar shake is one of the most aesthetically desirable roofing materials available. Western red cedar has a natural warmth, a rustic texture that improves with age, and genuine thermal properties — it insulates roughly twice as effectively as asphalt shingles. A cedar shake roof on a Grand Rapids home costs <strong>$10,000–$22,000</strong> and lasts 20–30 years with proper maintenance.</p>
-                    <p style="margin-top: var(--space-4);">The honest challenge: moisture is cedar's adversary, and West Michigan has plenty of it. Most cedar roofs that fail early weren't installed with Michigan's humidity and rainfall in mind. The critical factors are breathable underlayment (not standard felt), proper shake spacing for air circulation, and adequate ventilation — all things that add a few hours to installation but add years to lifespan.</p>
-                    <p style="margin-top: var(--space-4);">Daniel Kamps is direct about cedar maintenance requirements before any project begins. If you want a roof that needs cleaning and preservative treatment every 5–7 years, cedar is a strong choice. If you want a completely hands-off roof, he'll tell you that too and point you toward metal or architectural shingles.</p>
-                </div>
-                <div style="margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap;">
-                    <a href="/contact" class="btn btn-primary">Get a Free Cedar Estimate</a>
-                    <a href="/services/asphalt-shingle-roofing" class="btn btn-outline-white" style="color: var(--color-primary); border-color: var(--color-primary);">Compare: Asphalt Shingles</a>
-                </div>
-            </div>
-
-            <div class="img-reveal" data-animate="wipe-right" style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);">
-                <picture>
-                    <source srcset="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470067945_122125377158552346_4518004843740215702_n.jpg" type="image/jpeg">
-                    <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470067945_122125377158552346_4518004843740215702_n.jpg"
-                         alt="Cedar shake roof installation on Grand Rapids Michigan home by Kamps Professional Roofing"
-                         width="700" height="500" loading="lazy">
-                </picture>
-            </div>
-
-        </div>
+<!-- Process Steps -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">How It Works</span>
+      <h2>Cedar Shake Installation: Built for Michigan Moisture</h2>
     </div>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-number">1</div>
+        <h3>Grade &amp; Style Consultation</h3>
+        <p>Cedar grade and style are selected. Fire treatment, HOA compliance, and insurance requirements are confirmed before any material is ordered.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">2</div>
+        <h3>Tear-Off &amp; Deck Prep</h3>
+        <p>Old roofing removed, deck inspected and repaired. Any areas of moisture damage from the previous roof are addressed — cedar amplifies problems it's installed over.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">3</div>
+        <h3>Breathable Underlayment</h3>
+        <p>Breathable, non-perforated felt or specialty cedar underlayment is installed. Standard 15# felt traps moisture under cedar — this is where most Michigan cedar installations fail.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-number">4</div>
+        <h3>Cedar Install with Proper Spacing</h3>
+        <p>Shakes installed with correct side-lap spacing for airflow and drying. Stainless or hot-dipped galvanized fasteners only — steel nails corrode cedar within years in West Michigan.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Cedar Benefits ─────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Why Cedar</p>
-            <h2>What Western Red Cedar Delivers That Other Materials Don't</h2>
-        </div>
-        <div class="cedar-benefits" data-animate="fade-up">
-            <div class="benefit-card">
-                <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"></path><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="2" x2="6" y2="4"></line><line x1="10" y1="2" x2="10" y2="4"></line><line x1="14" y1="2" x2="14" y2="4"></line></svg>
-                </div>
-                <h3 style="font-size: 1rem;">Natural Insulation</h3>
-                <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;">Cedar's cellular structure insulates roughly 2x better than asphalt shingles — measurable difference in heating and cooling costs, especially in Michigan winters.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line></svg>
-                </div>
-                <h3 style="font-size: 1rem;">Distinctive Aesthetic</h3>
-                <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;">Cedar's natural color variation and textured surface create a look that no synthetic material replicates — it weathers to a silver-gray that many homeowners find more appealing than its original state.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                </div>
-                <h3 style="font-size: 1rem;">Wind Resistance</h3>
-                <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: 0.5rem;">Hand-split cedar shakes have natural interlocking properties and significant weight. Properly fastened, they perform well in the wind events common to West Michigan weather systems.</p>
-            </div>
-        </div>
+<!-- FAQ -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>What Grand Rapids Homeowners Ask About Cedar Shake</h2>
     </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>How long do cedar shake roofs last in Michigan?</h3>
+        <p>20–30 years with proper maintenance. Michigan's moisture is cedar's main adversary. Roofs with good ventilation, breathable underlayment, and periodic cleaning and treatment every 5–7 years consistently reach the longer end of that range.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are cedar roofs high maintenance?</h3>
+        <p>More maintenance than asphalt, less than most expect. Cedar benefits from moss and algae cleaning every 5–7 years and a preservative treatment to prevent rot. Properly maintained cedar reaches 25–30 years. Kamps is upfront about what ownership requires before any estimate is signed.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How much does cedar shake roofing cost in Grand Rapids?</h3>
+        <p>$10,000–$22,000 for most residential applications. Cedar grade, shake style, and roof complexity affect cost. A detailed, itemized estimate is provided after Daniel inspects your roof — no guessing from aerial photos.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Mid-Page CTA Banner ───────────────────────────────────────────── -->
-<section class="cta-banner" aria-label="Request a free cedar shake roofing estimate">
-    <div class="container" style="text-align: center;">
-        <p class="eyebrow" style="color: rgba(255,255,255,0.7);">Natural Wood Roofing</p>
-        <h2 style="color: white; margin-bottom: var(--space-4);">Get an Honest Cedar Shake Estimate — No Surprises</h2>
-        <p style="color: rgba(255,255,255,0.85); max-width: 580px; margin: 0 auto var(--space-8); line-height: 1.6;">
-            Daniel explains cedar's maintenance requirements upfront so you know exactly what you're committing to before signing anything. Free estimates across Grand Rapids and Kent County.
-        </p>
-        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-            <a href="/contact" class="btn btn-accent btn-lg">Get My Free Estimate</a>
-            <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-        </div>
+<!-- Closing CTA — CTA #3 -->
+<section style="background: var(--color-dark); padding: 5rem 0;">
+  <div class="container" style="text-align: center;">
+    <h2 style="color: white; margin-bottom: 1rem;">Get Your Cedar Shake Roof Estimate This Week</h2>
+    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">$10,000–$22,000 installed. Free estimate within 24–48 hours. Daniel explains the full maintenance picture before you commit — so your cedar roof performs for the full 20–30 years.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
     </div>
-</section>
-
-<!-- ── Installation Process ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">How It Works</p>
-            <h2>Cedar Shake Installation: Built for Michigan Moisture</h2>
-        </div>
-        <div class="process-grid" style="margin-top: var(--space-10);">
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">1</div>
-                <h3>Grade &amp; Style Consultation</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Cedar grade (No. 1 Handsplit, Blue Label, etc.) and style (hand-split, sawn, tapersplit) are selected. Fire treatment, HOA compliance, and insurance requirements are confirmed at this stage.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">2</div>
-                <h3>Tear-Off &amp; Deck Prep</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Old roofing removed, deck inspected and repaired. Any areas of moisture damage from the previous roof are addressed before new material goes down — cedar amplifies problems it's installed over.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">3</div>
-                <h3>Breathable Underlayment Install</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Breathable, non-perforated felt or specialty cedar underlayment is installed. Standard 15# felt traps moisture under cedar and accelerates rot — this is where most Michigan cedar installations fail.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">4</div>
-                <h3>Cedar Installation with Proper Spacing</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Shakes are installed with correct side-lap spacing to allow airflow and drying. Stainless or hot-dipped galvanized fasteners only — steel nails stain and corrode cedar within years in West Michigan's humidity.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Why Kamps ─────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">The Kamps Difference</p>
-            <h2>Cedar Installation Built for West Michigan's Humidity — Not Arizona's</h2>
-        </div>
-        <div class="why-grid" style="margin-top: var(--space-10);">
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Breathable Installation Systems</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Kamps uses breathable underlayment on every cedar job — not standard felt. This is the single most important factor in cedar longevity in Michigan's climate. It adds cost to the job and years to the roof.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Honest About Maintenance</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Cedar needs cleaning and preservative treatment every 5–7 years. Daniel explains this during the estimate — if low-maintenance is the priority, he'll say so and recommend alternatives. No surprises after the sale.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Correct Fastener Specification</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Standard galvanized fasteners corrode under cedar's natural oils and Michigan's humidity. Kamps uses only stainless steel or hot-dipped galvanized fasteners on cedar — a detail that prevents unsightly rust staining and fastener failure.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Fire Treatment Confirmation</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Before ordering any cedar material, Kamps confirms HOA requirements and insurance specifications. Fire-treated Class A shake is available and sometimes required — this is confirmed upfront, not discovered after installation.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start;">
-            <div data-animate="fade-up">
-                <p class="eyebrow">Common Questions</p>
-                <h2>What Grand Rapids Homeowners Ask About Cedar Shake Roofing Near Me</h2>
-                <p class="prose" style="margin-top: var(--space-4);">
-                    Cedar shake's maintenance requirements and Michigan's climate create specific questions. Here are the direct answers — no softening of the facts.
-                </p>
-                <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-text-light);">Last Updated: April 2026</p>
-                <a href="/contact" class="btn btn-primary" style="margin-top: var(--space-6);">Talk to Daniel About Cedar</a>
-            </div>
-            <div class="faq-grid" data-animate="fade-up">
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How long do cedar shake roofs last in Michigan?</div>
-                    <div class="faq-answer">20–30 years with proper maintenance. Michigan's moisture is cedar's main adversary. Roofs with good ventilation, breathable underlayment, and periodic cleaning and treatment (every 5–7 years) consistently reach the longer end of that range.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Are cedar roofs high maintenance?</div>
-                    <div class="faq-answer">More maintenance than asphalt, less than most expect. Cedar benefits from moss and algae cleaning every 5–7 years and a preservative treatment to prevent rot. Properly maintained cedar reaches 25–30 years. Kamps is upfront about what ownership requires before any estimate is signed.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>What's the fire risk with cedar shake?</div>
-                    <div class="faq-answer">Untreated cedar is Class C fire rating. Fire-treated Class A cedar is available and required by some HOAs and insurers. Kamps confirms your requirements before ordering — there are no surprises after the material is on the roof.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How much does cedar shake roofing cost in Grand Rapids?</div>
-                    <div class="faq-answer">$10,000–$22,000 for most residential applications. Cedar grade, shake style, and roof complexity affect cost. A detailed, itemized estimate is provided after Daniel inspects your roof — no guessing from aerial photos.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Closing CTA ───────────────────────────────────────────────────── -->
-<section class="closing-cta">
-    <div class="container" style="position: relative; z-index: 1;">
-        <div style="max-width: 680px; margin: 0 auto; text-align: center;" data-animate="fade-up">
-            <p class="eyebrow" style="color: var(--color-accent);">Natural. Distinctive. Built to Last.</p>
-            <h2 style="color: white; margin-bottom: var(--space-4);">Get Your Cedar Shake Roof Estimate This Week</h2>
-            <p style="color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto var(--space-8); line-height: 1.65;">
-                $10,000–$22,000 installed. Free estimate within 24–48 hours. Daniel explains the full maintenance picture before you commit — so your cedar roof performs for the full 20–30 years.
-            </p>
-            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: var(--space-6);">Licensed &amp; Insured · Grand Rapids, MI · Kent County &amp; West Michigan</p>
-        </div>
-    </div>
+  </div>
 </section>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

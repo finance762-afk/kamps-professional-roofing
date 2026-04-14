@@ -26,77 +26,122 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-.inner-hero { position: relative; min-height: 55vh; display: flex; align-items: center; background-size: cover; background-position: center; padding-top: 80px; }
+.inner-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+}
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav { background: var(--color-light); padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-light); }
-.breadcrumb { display: flex; align-items: center; gap: 0.5rem; list-style: none; font-size: 0.875rem; }
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-.process-step { text-align: center; padding: 2rem 1.5rem; background: var(--color-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
-.process-number { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); color: white; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.process-step {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.process-number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
 .process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
 .process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.why-item { display: flex; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
-.why-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); display: flex; align-items: center; justify-content: center; color: white; }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.why-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.why-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 .why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
 .why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-.stat-overlay { position: absolute; bottom: -1.5rem; right: -1.5rem; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); color: white; border-radius: var(--radius-lg); padding: 1.25rem 1.75rem; text-align: center; box-shadow: var(--shadow-lg); }
-.stat-overlay .big-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; line-height: 1; }
-.stat-overlay .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; margin-top: 0.25rem; }
-.about-image { position: relative; }
-.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.faq-item { background: var(--color-white); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-card); border-left: 4px solid var(--color-accent); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.faq-item {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
+}
 .faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
 .faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
-@media (max-width: 1023px) { .process-grid { grid-template-columns: 1fr 1fr; } .faq-grid { grid-template-columns: 1fr; } }
-@media (max-width: 767px) { .why-grid { grid-template-columns: 1fr; } .stat-overlay { right: 0; bottom: -1rem; } }
-@media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
 </style>
 
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- INNER HERO — CTA #1 -->
+<!-- Hero — CTA #1 -->
 <section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914928-482125034_122146001564552346_2600838399371235041_n.jpg');">
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
       <span class="hero-eyebrow">Kamps Professional Roofing</span>
       <h1>Siding Repair Grand Rapids, MI</h1>
-      <p class="hero-subtitle">Cracked panels, hail dents, heat-warped sections, and storm damage repaired with color-matching experience and honest advice on whether repair or full replacement is the better call for your home.</p>
+      <p class="hero-subtitle">Cracked panels, hail dents, heat-warped sections, and storm damage repaired with color-matching experience and honest advice on whether repair or full replacement is the better call.</p>
       <div class="hero-buttons">
         <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
         <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
       </div>
       <div class="hero-trust">
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          Licensed &amp; Insured
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          Insurance Documentation
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Free Estimates
-        </span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER STRIP -->
-<div class="ticker-strip" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Storm Damage Specialists</span><span>★★★★★</span><span>Insurance Documentation</span><span>Color Matching Experience</span><span>Grand Rapids, MI</span><span>Honest Repair vs. Replace Advice</span><span>Licensed &amp; Insured</span><span>★★★★★</span>
-    <span>Storm Damage Specialists</span><span>★★★★★</span><span>Insurance Documentation</span><span>Color Matching Experience</span><span>Grand Rapids, MI</span><span>Honest Repair vs. Replace Advice</span><span>Licensed &amp; Insured</span><span>★★★★★</span>
-  </div>
-</div>
-
-<!-- SERVICE DETAIL -->
+<!-- Service Detail -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="about-split" data-animate>
@@ -106,31 +151,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <h2>Fix Damaged Siding Before Water Gets Behind It — West Michigan Storms Don't Wait</h2>
         </div>
         <p>Most siding panel repairs in Grand Rapids run <strong>$200–$1,200</strong> for isolated damage. Larger areas requiring section replacement can run higher depending on square footage and the accessibility of the affected wall. Kamps provides written quotes before any work begins — storm damage estimates are documented in detail for insurance claim purposes when applicable.</p>
-        <p>West Michigan generates significant hail activity between April and September, with Grand Rapids' position relative to Lake Michigan contributing to storm development. Hail damage to vinyl siding presents as circular impact marks, cracks at impact points, and occasionally punched-through panels on severe events. This type of damage is often insurance-covered — Kamps has experience documenting hail damage in a format insurers accept and can assist with the claims process.</p>
-        <p>Heat warping is a different problem entirely. South and west elevations in Grand Rapids can see surface temperatures above 160°F on summer afternoons, particularly where a light-colored masonry wall, concrete driveway, or vehicle reflects heat back onto the siding. Low-grade vinyl panels installed too tight — without proper expansion gaps — buckle and warp under these conditions. Repairing warped panels requires understanding why the warping occurred; replacing damaged panels without correcting the cause (usually improper gap spacing during the original install) means the problem returns within a few seasons.</p>
-        <p>Wind damage from severe weather events typically presents as panels partially separated from the wall, J-channel trim pulled loose at corners, or full panel sections blown off. These failures often expose the substrate and house wrap to direct weather — Kamps prioritizes these calls since every rain event that hits an exposed wall section increases the risk of structural moisture damage.</p>
-        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: April 2026</p>
+        <p>West Michigan generates significant hail activity between April and September, with Grand Rapids' position relative to Lake Michigan contributing to storm development. Hail damage to vinyl siding presents as circular impact marks, cracks at impact points, and occasionally punched-through panels on severe events. This type of damage is often insurance-covered — Kamps documents hail damage in a format insurers accept and can assist with the claims process. Heat warping is a different problem: south and west elevations can see surface temperatures above 160 degrees on summer afternoons, and low-grade vinyl panels installed too tight buckle and warp under these conditions. Repairing warped panels requires understanding why the warping occurred — replacing without correcting the cause means the problem returns.</p>
+        <p>Wind damage from severe weather typically presents as panels partially separated from the wall, J-channel trim pulled loose at corners, or full panel sections blown off. These failures expose the substrate and house wrap to direct weather — Kamps prioritizes these calls since every rain event that hits an exposed wall section increases the risk of structural moisture damage. A temporary patch to stop water intrusion can often be applied on the same visit as the estimate, buying time until matching material arrives for the permanent repair.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
       </div>
       <div class="about-image">
-        <picture>
-          <img
-            src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914928-482125034_122146001564552346_2600838399371235041_n.jpg"
-            alt="siding repair work on a Grand Rapids Michigan home after storm damage"
-            width="600"
-            height="450"
-            loading="lazy"
-            style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
-        </picture>
-        <div class="stat-overlay">
-          <div class="big-number">$200</div>
-          <div class="label">Repairs Starting At</div>
-        </div>
+        <picture><img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914928-482125034_122146001564552346_2600838399371235041_n.jpg" alt="siding repair work on a Grand Rapids Michigan home after storm damage" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;"></picture>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE KAMPS -->
+<!-- Why Choose Kamps -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -140,7 +172,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     <div class="why-grid">
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="10.5" r="2.5"></circle><circle cx="8.5" cy="7.5" r="2.5"></circle><circle cx="6.5" cy="12.5" r="2.5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.47-1.125a.381.381 0 01-.086-.21c0-.41.333-.744.744-.744H16c3.314 0 6-2.686 6-6 0-4.97-4.686-9-10-9z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
         <div>
           <h3>Color-Matching Experience</h3>
@@ -149,7 +181,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
         </div>
         <div>
           <h3>Honest Assessment: Repair vs. Replacement</h3>
@@ -158,7 +190,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <div>
           <h3>Insurance Documentation for Storm Damage</h3>
@@ -167,7 +199,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
         <div>
           <h3>Fast Turnaround on Exposed Wall Sections</h3>
@@ -178,10 +210,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- CTA BANNER — mid-page CTA #2 -->
+<!-- Mid-page CTA — CTA #2 -->
 <div class="cta-banner">
   <div class="container">
-    <h2>Storm Damage on Your Siding? Get a Documented Estimate Before You Call Your Insurer.</h2>
+    <h2>Storm Damage on Your Siding? Get a Documented Estimate Before You Call Your Insurer</h2>
     <p>Kamps documents hail and wind damage in the format insurance companies need. A free estimate from Kamps gives you the information your adjuster will ask for.</p>
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
       <a href="/contact" class="btn btn-accent btn-lg">Get Your Free Estimate</a>
@@ -190,7 +222,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </div>
 
-<!-- PROCESS STEPS -->
+<!-- Process Steps -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -222,11 +254,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- FAQ SECTION -->
+<!-- FAQ -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
-      <span class="eyebrow">Common Questions</span>
+      <span class="eyebrow">Frequently Asked Questions</span>
       <h2>Questions About Siding Repair in Grand Rapids</h2>
     </div>
     <div class="faq-grid">
@@ -240,21 +272,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="faq-item" data-animate>
         <h3>How do I know if my siding is storm damaged?</h3>
-        <p>After a hail event, look for <strong>circular impact marks or cracks</strong> on siding panels — the same storm that damages your siding usually leaves marks on aluminum window screens and gutters, which is good supporting evidence for an insurance claim. Wind damage is more visible: separated panels, pulled J-channel at corners, or completely missing sections. If you saw a significant storm come through Grand Rapids and have newer siding with any unexplained marks, a free inspection from Kamps will tell you definitively what you have.</p>
-      </div>
-      <div class="faq-item" data-animate>
-        <h3>Will patched siding match perfectly?</h3>
-        <p>New panels will match the original color closely but may not be identical to siding that has weathered in place for years. The degree of visible difference depends on how long the existing siding has been on the home and the color — lighter colors show less variation than darker tones. Kamps sources the closest available match and, for significant repairs, can sometimes use panels from less-visible wall sections to replace high-visibility damage, moving new material to the inconspicuous location where a slight difference won't be noticed from the street.</p>
+        <p>After a hail event, look for <strong>circular impact marks or cracks</strong> on siding panels — the same storm that damages your siding usually leaves marks on aluminum window screens and gutters, which is good supporting evidence for an insurance claim. Wind damage is more visible: separated panels, pulled J-channel at corners, or completely missing sections. If you saw a significant storm come through Grand Rapids and have any unexplained marks, a free inspection from Kamps will tell you definitively what you have.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLOSING CTA — CTA #3 -->
+<!-- Closing CTA — CTA #3 -->
 <section style="background: var(--color-dark); padding: 5rem 0;">
   <div class="container" style="text-align: center;">
-    <h2 style="color: white; margin-bottom: 1rem;">Storm Damage or Cracked Panels — Don't Let Exposed Siding Become a Water Damage Problem</h2>
-    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">Every rain event that hits damaged siding risks moisture getting behind the wall. Get a free estimate and documentation from Kamps before the next storm hits.</p>
+    <h2 style="color: white; margin-bottom: 1rem;">Don't Let Damaged Siding Become a Water Damage Problem</h2>
+    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">Every rain event that hits cracked or missing siding risks moisture getting behind the wall. Get a free estimate and insurance documentation from Kamps before the next storm hits.</p>
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
       <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
       <?php echo phone_link('btn btn-outline-white btn-lg'); ?>

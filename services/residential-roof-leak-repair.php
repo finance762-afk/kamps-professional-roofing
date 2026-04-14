@@ -26,7 +26,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-/* ── Page-specific: Residential Roof Leak Repair ─────────── */
 .inner-hero {
   position: relative;
   min-height: 55vh;
@@ -37,23 +36,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   padding-top: 80px;
 }
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-
-.breadcrumb-nav {
-  background: var(--color-light);
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--color-gray-light);
-}
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  list-style: none;
-  font-size: 0.875rem;
-}
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -83,7 +65,6 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 }
 .process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
 .process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-
 .why-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -111,36 +92,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 }
 .why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
 .why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-
-.stat-overlay {
-  position: absolute;
-  bottom: -1.5rem;
-  right: -1.5rem;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  color: white;
-  border-radius: var(--radius-lg);
-  padding: 1.25rem 1.75rem;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-}
-.stat-overlay .big-number {
-  font-family: var(--font-heading);
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1;
-}
-.stat-overlay .label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.9;
-  margin-top: 0.25rem;
-}
-.about-image { position: relative; }
-
 .faq-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-top: 2.5rem;
 }
@@ -153,25 +107,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 }
 .faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
 .faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
-
-/* Urgency callout */
-.urgency-note {
-  background: #fff3cd;
-  border-left: 4px solid #f59e0b;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  padding: 1rem 1.25rem;
-  margin: 1.5rem 0;
-  font-size: 0.9rem;
-  color: #92400e;
-}
-
 @media (max-width: 1023px) {
   .process-grid { grid-template-columns: 1fr 1fr; }
-  .faq-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 767px) {
   .why-grid { grid-template-columns: 1fr; }
-  .stat-overlay { right: 0; bottom: -1rem; }
 }
 @media (max-width: 480px) {
   .process-grid { grid-template-columns: 1fr; }
@@ -180,7 +120,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- INNER HERO — CTA #1 ──────────────────────────────────── -->
+<!-- Hero — CTA #1 -->
 <section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914926-2025-06-27__1_.webp');">
   <div class="hero-overlay"></div>
   <div class="container">
@@ -189,74 +129,40 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       <h1>Residential Roof Leak Repair Grand Rapids, MI</h1>
       <p class="hero-subtitle">We find the actual source of your leak — not just patch where water shows up inside. Same-week appointments for active leaks across Kent County.</p>
       <div class="hero-buttons">
-        <a href="/contact" class="btn btn-accent btn-lg">Schedule a Leak Repair</a>
+        <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
         <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
       </div>
       <div class="hero-trust">
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          Licensed &amp; Insured
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          Same-Week Appointments
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 11 4 16"></polyline></svg>
-          Workmanship Guarantee
-        </span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER STRIP ─────────────────────────────────────────── -->
-<div class="ticker-strip" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Licensed &amp; Insured</span><span>★★★★★</span><span>30+ Years Experience</span><span>Same-Week Leak Repair</span><span>Grand Rapids, MI</span><span>Find the True Source</span><span>Workmanship Guarantee</span><span>★★★★★</span>
-    <span>Licensed &amp; Insured</span><span>★★★★★</span><span>30+ Years Experience</span><span>Same-Week Leak Repair</span><span>Grand Rapids, MI</span><span>Find the True Source</span><span>Workmanship Guarantee</span><span>★★★★★</span>
-  </div>
-</div>
-
-<!-- SERVICE DETAIL ───────────────────────────────────────── -->
+<!-- Service Detail -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="about-split" data-animate>
       <div class="about-content">
-        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
-          <span class="eyebrow">Roof Repair</span>
+        <div class="section-header" style="text-align:left; margin-bottom: 2rem;">
+          <span class="eyebrow">Roof Leak Repair</span>
           <h2>The Water Stain on Your Ceiling Is Rarely Where the Leak Actually Is</h2>
         </div>
-        <p>Most residential roof leaks in Grand Rapids are repaired for <strong>$300–$1,500</strong>, depending on the cause and how much area is affected. Common culprits include failed flashing at chimneys, skylights, and pipe boots; ice dam damage along eaves (extremely common in West Michigan winters); lifted or cracked shingles from high winds; and deteriorated valley material. The repair cost is far lower when the problem is caught before it spreads into the decking or insulation below.</p>
-
-        <div class="urgency-note">
-          <strong>Don't wait on an active leak.</strong> Mold can begin developing in wet insulation within 24–48 hours. What starts as a $500 repair can become a $3,000 structural issue if water reaches the decking or interior framing.
-        </div>
-
-        <p>The biggest mistake homeowners make is patching where water appears on the ceiling — which is almost never where the leak originates. Water travels along rafters and sheathing before dripping into visible areas, sometimes traveling 6–10 feet from the actual entry point. Kamps traces leaks to their source through a methodical inspection of the roofline, flashing, and attic space rather than guessing at the most obvious spot.</p>
-        <p>After every leak repair, you'll receive a written assessment of your full roof condition — so you know if there are other areas to watch or additional work to plan. No surprises six months later. If the roof is in overall good shape, Daniel will tell you. If there are other issues developing, you'll know about them before they turn into their own emergency calls.</p>
-        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: April 2026</p>
+        <p>Most residential roof leak repairs in Grand Rapids cost <strong>$300-$1,500</strong>, depending on the cause and how much area is affected. Common culprits include failed flashing at chimneys, skylights, and pipe boots; ice dam damage along eaves (extremely common in West Michigan winters); lifted or cracked shingles from high winds; and deteriorated valley material. The repair cost is far lower when the problem is caught before it spreads into the decking or insulation below. Mold can begin developing in wet insulation within 24-48 hours, turning a $500 repair into a $3,000 structural issue if water reaches the decking or interior framing.</p>
+        <p>The biggest mistake homeowners make is patching where water appears on the ceiling — which is almost never where the leak originates. Water travels along rafters and sheathing before dripping into visible areas, sometimes traveling 6-10 feet from the actual entry point. Kamps traces every leak to its source through a methodical inspection of the roofline, flashing, and attic space rather than guessing at the most obvious spot.</p>
+        <p>After every roof leak repair, you receive a written assessment of your full roof condition — so you know if there are other areas to watch or additional work to plan for your Grand Rapids home. No surprises six months later. If the roof is in overall good shape, Daniel will tell you. If there are other issues developing, you'll know about them before they turn into their own emergency calls.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
       </div>
       <div class="about-image">
-        <picture>
-          <img
-            src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914926-2025-06-27__1_.webp"
-            alt="roof leak repair on a Grand Rapids Michigan residential home near me"
-            width="600"
-            height="450"
-            loading="lazy"
-            style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
-        </picture>
-        <div class="stat-overlay">
-          <div class="big-number">$300</div>
-          <div class="label">Repairs From</div>
-        </div>
+        <picture><img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914926-2025-06-27__1_.webp" alt="roof leak repair on a Grand Rapids Michigan residential home near me" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;"></picture>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE KAMPS ─────────────────────────────────────── -->
+<!-- Why Choose Kamps -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -266,7 +172,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     <div class="why-grid">
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         </div>
         <div>
           <h3>We Find the Actual Source — Not Just Patch Symptoms</h3>
@@ -284,7 +190,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
         </div>
         <div>
           <h3>Written Roof Condition Report After Every Repair</h3>
@@ -304,7 +210,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- CTA BANNER — CTA #2 ─────────────────────────────────── -->
+<!-- Mid-page CTA — CTA #2 -->
 <div class="cta-banner">
   <div class="container">
     <h2>Leaking Right Now? Don't Wait for It to Get Worse.</h2>
@@ -316,7 +222,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </div>
 
-<!-- PROCESS STEPS ────────────────────────────────────────── -->
+<!-- Process Steps -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -348,7 +254,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- FAQ SECTION ──────────────────────────────────────────── -->
+<!-- FAQ -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -357,16 +263,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     </div>
     <div class="faq-grid">
       <div class="faq-item" data-animate>
-        <h3>How do I know where my roof is actually leaking?</h3>
-        <p>The water stain on your ceiling is almost never directly below the leak source. Water enters at a compromised point — often a flashing joint, a cracked shingle, or an ice dam along the eave — then travels along rafters or sheathing before dripping through. Common sources in Grand Rapids homes include chimney flashing, pipe boot seals, and valley deterioration. A proper inspection traces the path from the drip back to the entry point.</p>
-      </div>
-      <div class="faq-item" data-animate>
         <h3>How much does a roof leak repair cost in Grand Rapids?</h3>
-        <p>Most residential leak repairs in Kent County run <strong>$300–$1,500</strong>. A simple flashing reseal or a few replaced shingles at the lower end; more extensive repairs involving deck damage or multiple problem areas at the higher end. Kamps provides a written estimate before starting any work so there are no surprises on the invoice.</p>
+        <p>Most residential leak repairs in Kent County run <strong>$300-$1,500</strong>. A simple flashing reseal or a few replaced shingles at the lower end; more extensive repairs involving deck damage or multiple problem areas at the higher end. Kamps provides a written estimate before starting any work so there are no surprises on the invoice.</p>
       </div>
       <div class="faq-item" data-animate>
         <h3>Can a leaking roof wait a few weeks?</h3>
-        <p>No. An active roof leak is an active water intrusion event. Mold can begin forming in wet insulation within <strong>24–48 hours</strong>. Even a slow drip can saturate roof decking in days, turning a $600 repair into a $3,000 structural fix. If water is getting in, it should be addressed this week — not next month.</p>
+        <p>No. An active roof leak is an active water intrusion event. Mold can begin forming in wet insulation within <strong>24-48 hours</strong>. Even a slow drip can saturate roof decking in days, turning a $600 repair into a $3,000 structural fix. If water is getting in, it should be addressed this week — not next month.</p>
       </div>
       <div class="faq-item" data-animate>
         <h3>Will fixing one area stop all the leaks?</h3>
@@ -376,7 +278,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- CLOSING CTA — CTA #3 ─────────────────────────────────── -->
+<!-- Closing CTA — CTA #3 -->
 <section style="background: var(--color-dark); padding: 5rem 0;">
   <div class="container" style="text-align: center;">
     <h2 style="color: white; margin-bottom: 1rem;">Stop the Leak Before It Becomes a Renovation</h2>

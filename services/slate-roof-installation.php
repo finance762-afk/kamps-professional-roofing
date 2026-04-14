@@ -44,11 +44,6 @@ $schemaMarkup = '[' . breadcrumb_schema($breadcrumbs) . ',' . service_schema(
             'name'           => 'Can slate be repaired if one tile breaks?',
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Yes — individual slate tiles can be replaced without disturbing the rest of the roof. A skilled slate roofer removes the damaged tile, installs a new one with a slate hook, and seals it properly. This is one of slate\'s advantages over other materials — repairability without full re-roof.'],
         ],
-        [
-            '@type'          => 'Question',
-            'name'           => 'Is my home suitable for slate roofing?',
-            'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Slate weighs 3–4x more than asphalt shingles — sometimes 700–1,000 lbs per square. A structural assessment is required before installation. Kamps includes this evaluation in every slate estimate. Many homes can accommodate slate with appropriate framing reinforcement.'],
-        ],
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ']';
 
@@ -57,427 +52,271 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-/* ── Page-specific styles ─────────────────────────────────────────── */
 .inner-hero {
-    position: relative;
-    min-height: 55vh;
-    display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    padding-top: 80px;
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
 }
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav {
-    background: var(--color-light);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-gray-light);
-}
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    font-size: 0.875rem;
-}
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-
 .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .process-step {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .process-number {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 }
+.process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
+.process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
 .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .why-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .why-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
-.slate-pullquote {
-    background: var(--color-primary);
-    border-left: 5px solid var(--color-accent);
-    padding: var(--space-10) var(--space-12);
-    border-radius: var(--radius-lg);
-    margin: var(--space-10) 0;
-    position: relative;
-    overflow: hidden;
+.why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
+.why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
-.slate-pullquote::before {
-    content: '"';
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    font-family: var(--font-heading);
-    font-size: 12rem;
-    color: rgba(255,255,255,0.06);
-    line-height: 1;
-    pointer-events: none;
-}
-.slate-pullquote blockquote {
-    color: white;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-style: italic;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-}
-.slate-pullquote cite {
-    display: block;
-    margin-top: var(--space-4);
-    color: var(--color-accent);
-    font-size: 0.85rem;
-    font-style: normal;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-.faq-grid { display: grid; gap: 1rem; }
 .faq-item {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
 }
-.faq-question {
-    padding: 1.25rem 1.5rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
+.faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
 }
-.faq-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-top: 1px;
-}
-.faq-answer {
-    padding: 0 1.5rem 1.25rem 3.75rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-text-light);
-}
-.closing-cta {
-    background: var(--color-dark);
-    padding: var(--space-16) 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.closing-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.06;
-    pointer-events: none;
-}
-@media (max-width: 768px) {
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .slate-pullquote { padding: var(--space-8); }
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-    .process-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
 }
 </style>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────── -->
-<section class="inner-hero hero-overlay"
-         style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470057340_122125694816552346_3172886313220324016_n.jpg');"
-         aria-label="Slate roof installation service hero">
-    <div class="container">
-        <div class="hero-content">
-            <p class="hero-eyebrow eyebrow" data-animate="fade-up">Premium Roofing Materials</p>
-            <h1 data-animate="fade-up">Slate Roof Installation<br><span style="color: var(--color-accent);">Grand Rapids, MI</span></h1>
-            <p class="hero-subtitle" data-animate="fade-up">
-                The longest-lasting roofing material available — 75 to 150 years on a properly prepared structure. One of the few West Michigan contractors with genuine slate expertise.
-            </p>
-            <div class="hero-buttons" data-animate="fade-up">
-                <a href="/contact" class="btn btn-accent btn-lg magnetic">Get a Free Slate Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <div class="hero-trust" data-animate="fade-up">
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Licensed &amp; Insured
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    75–150 Year Lifespan
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Structural Assessment Included
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Breadcrumb ───────────────────────────────────────────────────── -->
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- ── Ticker Strip ─────────────────────────────────────────────────── -->
-<div class="ticker-strip" aria-hidden="true">
-    <div class="ticker-track">
-        <span>Natural Slate</span><span class="ticker-sep">✦</span>
-        <span>75–150 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Hand-Set Installation</span><span class="ticker-sep">✦</span>
-        <span>Vermont &amp; Pennsylvania Quarries</span><span class="ticker-sep">✦</span>
-        <span>Individual Tile Repair</span><span class="ticker-sep">✦</span>
-        <span>West Michigan Slate Specialist</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <!-- duplicate for seamless loop -->
-        <span>Natural Slate</span><span class="ticker-sep">✦</span>
-        <span>75–150 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Hand-Set Installation</span><span class="ticker-sep">✦</span>
-        <span>Vermont &amp; Pennsylvania Quarries</span><span class="ticker-sep">✦</span>
-        <span>Individual Tile Repair</span><span class="ticker-sep">✦</span>
-        <span>West Michigan Slate Specialist</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
+<!-- Hero — CTA #1 -->
+<section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470057340_122125694816552346_3172886313220324016_n.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kamps Professional Roofing</span>
+      <h1>Slate Roof Installation Grand Rapids, MI</h1>
+      <p class="hero-subtitle">The longest-lasting roofing material available — 75 to 150 years on a properly prepared structure. One of the few West Michigan contractors with genuine slate expertise.</p>
+      <div class="hero-buttons">
+        <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
+        <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Service Detail -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="about-split" data-animate>
+      <div class="about-content">
+        <div class="section-header" style="text-align:left; margin-bottom: 2rem;">
+          <span class="eyebrow">Natural Slate in Grand Rapids</span>
+          <h2>A Roof That May Outlast the House Itself</h2>
+        </div>
+        <p>Natural slate is the most durable roofing material available. A Grand Rapids home with a properly installed slate roof today — backed by correct structural prep and quality sourcing — could still be performing when your grandchildren inherit the property. The 75-to-150-year lifespan isn't marketing language; there are slate roofs on century-old homes across Michigan's historic districts still doing their job.</p>
+        <p>The investment reflects the outcome: <strong>$20,000-$50,000+</strong> for a full slate installation in the Grand Rapids area. That range accounts for slate type (soft vs. hard), roof complexity, and the structural reinforcement most homes need — slate weighs 700-1,000 lbs per square, three to four times heavier than asphalt. Every Kamps slate estimate includes a structural assessment because it's not optional; it's the foundation that makes everything else work.</p>
+        <p>Daniel Kamps is one of the few West Michigan roofing contractors who sources directly from quality quarries in Vermont and Pennsylvania, then handles the hand-set installation that slate requires. This is not a material for subcontracting or learning on the job. Each slate is individually fastened, ridge and hip tiles are set in mortar, and flashing at every penetration is custom-fabricated metal — no caulk shortcuts on a roof meant to last a century.</p>
+        <p>Individual broken slates can be replaced without disturbing the rest of the roof — one of the practical advantages over other premium materials. That repairability, combined with the extraordinary lifespan, makes slate one of the lowest cost-per-year roofing options available when measured across the full life of the material.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
+      </div>
+      <div class="about-image">
+        <picture>
+          <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470057340_122125694816552346_3172886313220324016_n.jpg" alt="Natural slate roof installation on Grand Rapids Michigan historic home by Kamps Professional Roofing" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Kamps -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Why Kamps</span>
+      <h2>Why Slate Requires a Specialist — and Why Kamps Is That Specialist</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div>
+          <h3>One of Few West Michigan Slate Contractors</h3>
+          <p>Slate is rare enough in Grand Rapids that most roofers have never installed it. Daniel has — repeatedly, on historic and custom homes. The learning curve for slate is steep; you don't want a contractor working it out on your project.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div>
+          <h3>Quality Quarry Sourcing</h3>
+          <p>Not all slate is equal. Soft slate from certain regions degrades faster under Michigan's freeze-thaw cycles. Daniel sources from quarries with documented track records for northern climate performance.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div>
+          <h3>Structural Assessment — No Surprises</h3>
+          <p>Every slate estimate includes a framing evaluation. If reinforcement is needed, it's scoped and priced before you commit. No contractor should quote slate without seeing what's underneath — and Kamps doesn't.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        </div>
+        <div>
+          <h3>Workmanship That Matches the Material</h3>
+          <p>Slate is the most premium roofing material available. Daniel sets every slate individually, mortars ridge and hip tiles correctly, and takes no shortcuts on flashing details that would compromise a 100-year roof.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid-page CTA — CTA #2 -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Get a Slate Roofing Estimate — Structural Assessment Included</h2>
+    <p>Most Grand Rapids contractors don't offer slate. Daniel Kamps does — with sourcing from quality quarries, structural prep, and the installation experience this material demands.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
+    </div>
+  </div>
 </div>
 
-<!-- ── Intro / Answer Block ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="split" style="align-items: center; gap: var(--space-12);">
-
-            <div class="img-reveal" data-animate="wipe-right" style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);">
-                <picture>
-                    <source srcset="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470057340_122125694816552346_3172886313220324016_n.jpg" type="image/jpeg">
-                    <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470057340_122125694816552346_3172886313220324016_n.jpg"
-                         alt="Natural slate roof installation on Grand Rapids Michigan historic home by Kamps Professional Roofing"
-                         width="700" height="500" loading="lazy">
-                </picture>
-            </div>
-
-            <div data-animate="fade-up">
-                <p class="eyebrow">Natural Slate in Grand Rapids</p>
-                <h2>A Roof That May Outlast the House Itself</h2>
-                <div class="prose" style="margin-top: var(--space-6);">
-                    <p>Natural slate is the most durable roofing material available. A Grand Rapids home with a properly installed slate roof today — backed by correct structural prep and quality sourcing — could still be performing when your grandchildren inherit the property. The 75–150 year lifespan isn't marketing language; there are slate roofs on century-old homes across Michigan's historic districts still doing their job.</p>
-                    <p style="margin-top: var(--space-4);">The investment reflects the outcome: <strong>$20,000–$50,000+</strong> for a full slate installation. That range accounts for slate type (soft vs. hard), roof complexity, and the structural reinforcement most homes need — slate weighs 700–1,000 lbs per square, three to four times heavier than asphalt. Every Kamps slate estimate includes a structural assessment because it's not optional; it's the foundation that makes everything else work.</p>
-                    <p style="margin-top: var(--space-4);">Daniel Kamps is one of the few West Michigan roofing contractors who sources directly from quality quarries and handles the hand-set installation that slate requires. It's not a material for subcontracting or learning on the job.</p>
-                </div>
-                <div style="margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap;">
-                    <a href="/contact" class="btn btn-primary">Get a Free Slate Estimate</a>
-                    <a href="/services/tile-roof-installation" class="btn btn-outline-white" style="color: var(--color-primary); border-color: var(--color-primary);">Compare: Tile Roofing</a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Pullquote / Signature Section ───────────────────────── -->
-        <div class="slate-pullquote" data-animate="fade-up">
-            <blockquote>
-                "Some slate roofs on historic Grand Rapids homes are still performing after 80 years. The material doesn't fail — improper installation does. We do it the way slate demands: one tile at a time, by hand, with the structural foundation to support it."
-            </blockquote>
-            <cite>— Daniel Kamps, Owner &amp; Master Roofer, 30+ Years</cite>
-        </div>
-
+<!-- Process Steps -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">How It Works</span>
+      <h2>Slate Roof Installation: A Deliberate, Methodical Process</h2>
     </div>
+    <div class="process-grid">
+      <div class="process-step" data-animate>
+        <div class="process-number">1</div>
+        <h3>Structural &amp; Design Consultation</h3>
+        <p>Framing is assessed for load capacity. Slate type, color, and size are selected. This consultation determines whether reinforcement is needed and finalizes the scope before material is ordered.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">2</div>
+        <h3>Slate Sourcing &amp; Selection</h3>
+        <p>Slate is sourced from reputable quarries — Vermont, Pennsylvania, and select imported sources. Each lot is reviewed for quality and freeze-thaw suitability for Michigan conditions.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">3</div>
+        <h3>Structural Prep</h3>
+        <p>Framing reinforcement completed if required. Existing roofing removed, deck inspected, specialty underlayment installed. Flashing at all penetrations is custom-fabricated metal.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">4</div>
+        <h3>Individual Slate Installation</h3>
+        <p>Each slate is hand-set and individually fastened. Ridge and hip tiles are set in mortar. The process is slower than shingles — precision is the point.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Mid-Page CTA Banner ───────────────────────────────────────────── -->
-<section class="cta-banner" aria-label="Request a free slate roofing estimate">
-    <div class="container" style="text-align: center;">
-        <p class="eyebrow" style="color: rgba(255,255,255,0.7);">Premium Materials, Premium Expertise</p>
-        <h2 style="color: white; margin-bottom: var(--space-4);">Get a Slate Roofing Estimate — Structural Assessment Included</h2>
-        <p style="color: rgba(255,255,255,0.85); max-width: 580px; margin: 0 auto var(--space-8); line-height: 1.6;">
-            Most Grand Rapids contractors don't offer slate. Daniel Kamps does — with sourcing from quality quarries, structural prep, and the installation experience this material demands.
-        </p>
-        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-            <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
-            <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Directly</a>
-        </div>
+<!-- FAQ -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>What Grand Rapids Homeowners Ask About Slate Roofing</h2>
     </div>
+    <div class="faq-grid">
+      <div class="faq-item" data-animate>
+        <h3>How long does slate roofing last?</h3>
+        <p>Natural slate lasts 75-150 years when properly installed. Soft slate (New York, Virginia) runs 75-100 years; hard slate (Vermont, Pennsylvania) can exceed 150. Some slate roofs on historic Michigan homes are over a century old and still performing.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>How much does slate roofing cost in Grand Rapids?</h3>
+        <p>$20,000-$50,000+ for full installation. Cost depends on slate type, roof complexity, and structural reinforcement needs. Over a 100-year lifespan, the per-year cost is often comparable to replacing asphalt shingles four times in the same period.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>Can slate be repaired if one tile breaks?</h3>
+        <p>Yes — individual slates can be replaced without touching the rest of the roof. A slate hook removes the damaged tile, a new one is inserted and fastened, and the repair is invisible. This repairability is one of slate's practical advantages over many other materials.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Installation Process ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">How It Works</p>
-            <h2>Slate Roof Installation: A Deliberate, Methodical Process</h2>
-        </div>
-        <div class="process-grid" style="margin-top: var(--space-10);">
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">1</div>
-                <h3>Structural &amp; Design Consultation</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Framing is assessed for load capacity. Slate type, color, and size are selected. This consultation determines whether reinforcement is needed and finalizes the scope before material is ordered.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">2</div>
-                <h3>Slate Sourcing &amp; Selection</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Slate is sourced from reputable quarries — Vermont, Pennsylvania, and select imported sources. Each lot is reviewed for quality and freeze-thaw suitability for Michigan conditions.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">3</div>
-                <h3>Structural Prep</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Framing reinforcement completed if required. Existing roofing removed, deck inspected, specialty underlayment installed. Flashing at all penetrations is custom-fabricated metal — no caulk shortcuts.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">4</div>
-                <h3>Individual Slate Installation</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Each slate is hand-set and individually fastened. Ridge and hip tiles are set in mortar. The process is slower than shingles — precision is the point. A slate roof installed correctly shouldn't need revisiting for a human lifetime.</p>
-            </div>
-        </div>
+<!-- Closing CTA — CTA #3 -->
+<section style="background: var(--color-dark); padding: 5rem 0;">
+  <div class="container" style="text-align: center;">
+    <h2 style="color: white; margin-bottom: 1rem;">Get a Free Slate Roofing Estimate in Grand Rapids</h2>
+    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">$20,000-$50,000+ installed. Structural assessment included at no charge. Daniel Kamps — one of the few West Michigan contractors with genuine slate installation expertise.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
     </div>
-</section>
-
-<!-- ── Why Kamps ─────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Expertise You Won't Find Everywhere</p>
-            <h2>Why Slate Requires a Specialist — and Why Kamps Is That Specialist</h2>
-        </div>
-        <div class="why-grid" style="margin-top: var(--space-10);">
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">One of Few West Michigan Slate Contractors</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Slate is rare enough in Grand Rapids that most roofers here have never installed it. Daniel has — repeatedly, on historic and custom homes. The learning curve for slate is steep; you don't want a contractor working it out on your project.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Quality Quarry Sourcing</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Not all slate is equal. Soft slate quarried from certain regions degrades faster under Michigan's freeze-thaw cycles. Daniel sources from quarries with documented track records for northern climate performance.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Structural Assessment — No Surprises</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Every slate estimate includes a framing evaluation. If reinforcement is needed, it's scoped and priced before you commit. No contractor should quote slate without seeing what's underneath — and Kamps doesn't.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Workmanship That Matches the Material</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Slate is the most premium roofing material available. The installation should match. Daniel sets every slate individually, mortars ridge and hip tiles correctly, and takes no shortcuts on flashing details that would compromise a 100-year roof.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start;">
-            <div data-animate="fade-up">
-                <p class="eyebrow">Common Questions</p>
-                <h2>What Grand Rapids Homeowners Ask About Natural Slate Roofing</h2>
-                <p class="prose" style="margin-top: var(--space-4);">
-                    Slate is uncommon enough in West Michigan that most homeowners have never had one. These are the questions Daniel hears most often.
-                </p>
-                <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-text-light);">Last Updated: April 2026</p>
-                <a href="/contact" class="btn btn-primary" style="margin-top: var(--space-6);">Ask Daniel About Slate</a>
-            </div>
-            <div class="faq-grid" data-animate="fade-up">
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How long does slate roofing last?</div>
-                    <div class="faq-answer">Natural slate lasts 75–150 years when properly installed. Soft slate (New York, Virginia) runs 75–100 years; hard slate (Vermont, Pennsylvania) can exceed 150. Some slate roofs on historic Michigan homes are over a century old and still performing.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How much does slate roofing cost in Grand Rapids?</div>
-                    <div class="faq-answer">$20,000–$50,000+ for full installation. Cost depends on slate type, roof complexity, and structural reinforcement needs. Over a 100-year lifespan, the per-year cost is often comparable to replacing asphalt shingles four times in the same period.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Can slate be repaired if one tile breaks?</div>
-                    <div class="faq-answer">Yes — individual slates can be replaced without touching the rest of the roof. A slate hook removes the damaged tile, a new one is inserted and fastened, and the repair is invisible. This repairability is one of slate's practical advantages over many other materials.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Is my home suitable for slate?</div>
-                    <div class="faq-answer">Slate weighs 700–1,000 lbs per square — 3–4x heavier than asphalt. Most homes need structural evaluation before installation. Kamps includes framing assessment in every slate estimate. Many homes can accommodate slate with appropriate reinforcement work.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Closing CTA ───────────────────────────────────────────────────── -->
-<section class="closing-cta">
-    <div class="container" style="position: relative; z-index: 1;">
-        <div style="max-width: 680px; margin: 0 auto; text-align: center;" data-animate="fade-up">
-            <p class="eyebrow" style="color: var(--color-accent);">The Last Roof You'll Ever Need</p>
-            <h2 style="color: white; margin-bottom: var(--space-4);">Get a Free Slate Roofing Estimate in Grand Rapids</h2>
-            <p style="color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto var(--space-8); line-height: 1.65;">
-                $20,000–$50,000+ installed. Structural assessment included at no charge. Daniel Kamps — one of the few West Michigan contractors with genuine slate installation expertise.
-            </p>
-            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: var(--space-6);">Licensed &amp; Insured · Grand Rapids, MI · Kent County &amp; West Michigan</p>
-        </div>
-    </div>
+  </div>
 </section>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

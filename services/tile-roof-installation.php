@@ -44,11 +44,6 @@ $schemaMarkup = '[' . breadcrumb_schema($breadcrumbs) . ',' . service_schema(
             'name'           => 'How long do tile roofs last?',
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Clay tile lasts 50–100 years; concrete tile typically 40–50 years. Both significantly outlast asphalt shingles. Lifespan depends on proper installation, adequate structural support, and correct flashing at all penetrations.'],
         ],
-        [
-            '@type'          => 'Question',
-            'name'           => 'Does my home need structural reinforcement for tile?',
-            'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Tile weighs 3–4x more than asphalt shingles. Most homes need a structural evaluation before tile installation. Kamps includes a framing assessment in every tile estimate — if reinforcement is needed, it\'s identified and priced upfront.'],
-        ],
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ']';
 
@@ -57,466 +52,271 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-/* ── Page-specific styles ─────────────────────────────────────────── */
 .inner-hero {
-    position: relative;
-    min-height: 55vh;
-    display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    padding-top: 80px;
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
 }
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav {
-    background: var(--color-light);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-gray-light);
-}
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    font-size: 0.875rem;
-}
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-
 .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .process-step {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .process-number {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 }
+.process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
+.process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
 .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .why-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .why-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
-.tile-compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: var(--space-8);
+.why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
+.why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
-.tile-card {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
-}
-.tile-card-header {
-    background: var(--color-primary);
-    color: white;
-    padding: 1rem 1.5rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.1rem;
-}
-.tile-card-header.accent-bg { background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); }
-.tile-card-body {
-    padding: 1.5rem;
-    background: var(--color-white);
-}
-.tile-card-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.tile-card-body ul li {
-    padding: 0.4rem 0;
-    border-bottom: 1px solid var(--color-gray-light);
-    font-size: 0.9rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-}
-.tile-card-body ul li:last-child { border-bottom: none; }
-.tile-card-body ul li::before {
-    content: '✓';
-    color: var(--color-accent);
-    font-weight: 700;
-    flex-shrink: 0;
-}
-.faq-grid { display: grid; gap: 1rem; }
 .faq-item {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
 }
-.faq-question {
-    padding: 1.25rem 1.5rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
+.faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
 }
-.faq-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-top: 1px;
-}
-.faq-answer {
-    padding: 0 1.5rem 1.25rem 3.75rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-text-light);
-}
-.closing-cta {
-    background: var(--color-dark);
-    padding: var(--space-16) 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.closing-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.06;
-    pointer-events: none;
-}
-@media (max-width: 768px) {
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .tile-compare { grid-template-columns: 1fr; }
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-    .process-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
 }
 </style>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────── -->
-<section class="inner-hero hero-overlay"
-         style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470039241_122125599908552346_4973791851142167865_n.jpg');"
-         aria-label="Tile roof installation service hero">
-    <div class="container">
-        <div class="hero-content">
-            <p class="hero-eyebrow eyebrow" data-animate="fade-up">Premium Roofing Materials</p>
-            <h1 data-animate="fade-up">Tile Roof Installation<br><span style="color: var(--color-accent);">Grand Rapids, MI</span></h1>
-            <p class="hero-subtitle" data-animate="fade-up">
-                Clay and concrete tile roofing done correctly for Michigan's freeze-thaw climate — structural assessments included, no surprises, 50+ year lifespans.
-            </p>
-            <div class="hero-buttons" data-animate="fade-up">
-                <a href="/contact" class="btn btn-accent btn-lg magnetic">Get a Free Tile Roof Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <div class="hero-trust" data-animate="fade-up">
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Licensed &amp; Insured
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    50+ Year Lifespans
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Structural Assessment Included
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Breadcrumb ───────────────────────────────────────────────────── -->
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- ── Ticker Strip ─────────────────────────────────────────────────── -->
-<div class="ticker-strip" aria-hidden="true">
-    <div class="ticker-track">
-        <span>Clay Tile Roofing</span><span class="ticker-sep">✦</span>
-        <span>Concrete Tile</span><span class="ticker-sep">✦</span>
-        <span>50–100 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Structural Assessment Included</span><span class="ticker-sep">✦</span>
-        <span>Freeze-Thaw Resistant</span><span class="ticker-sep">✦</span>
-        <span>Fire Resistant</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <span>Kent County</span><span class="ticker-sep">✦</span>
-        <!-- duplicate for seamless loop -->
-        <span>Clay Tile Roofing</span><span class="ticker-sep">✦</span>
-        <span>Concrete Tile</span><span class="ticker-sep">✦</span>
-        <span>50–100 Year Lifespan</span><span class="ticker-sep">✦</span>
-        <span>Structural Assessment Included</span><span class="ticker-sep">✦</span>
-        <span>Freeze-Thaw Resistant</span><span class="ticker-sep">✦</span>
-        <span>Fire Resistant</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <span>Kent County</span><span class="ticker-sep">✦</span>
+<!-- Hero — CTA #1 -->
+<section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470039241_122125599908552346_4973791851142167865_n.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kamps Professional Roofing</span>
+      <h1>Tile Roof Installation Grand Rapids, MI</h1>
+      <p class="hero-subtitle">Clay and concrete tile roofing done correctly for Michigan's freeze-thaw climate — structural assessments included, no surprises, 50+ year lifespans.</p>
+      <div class="hero-buttons">
+        <a href="/contact" class="btn btn-accent btn-lg">Get a Free Estimate</a>
+        <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Service Detail -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="about-split" data-animate>
+      <div class="about-content">
+        <div class="section-header" style="text-align:left; margin-bottom: 2rem;">
+          <span class="eyebrow">Tile Roofing in Grand Rapids</span>
+          <h2>Tile Roofing Is Practical in Michigan — With the Right Installation</h2>
+        </div>
+        <p>Clay and concrete tile can last 50-100 years on a West Michigan home — but only when installed correctly for our climate. The biggest failure point with tile in Michigan isn't the tile itself; it's freeze-thaw damage from moisture infiltration when the product or installation isn't specified for northern conditions. Kamps selects only tile products with documented freeze-thaw cycling ratings appropriate for Grand Rapids winters.</p>
+        <p>A full tile roof installation in Grand Rapids runs <strong>$15,000-$35,000+</strong> depending on tile type and roof complexity. Clay tile is the premium option — 50-100 years lifespan with color baked in that won't fade. Concrete tile is more affordable at 40-50 years, available in flat, low-profile, and barrel styles. Both weigh 3-4x more than asphalt shingles, which means most homes require structural reinforcement before tile installation can begin.</p>
+        <p>Before any number is finalized, Daniel Kamps evaluates the framing — that assessment is included in your estimate, not billed separately. If reinforcement is needed, the scope and cost are defined upfront so there are no change orders mid-project. Tile is less common in West Michigan than shingles or metal, which means most contractors here don't have deep tile experience. Kamps is an exception — the knowledge to specify the right product, prep the structure correctly, and install with methods that account for Michigan's temperature swings.</p>
+        <p>Every valley and penetration is flashed with metal, hip and ridge tiles are capped and mortared, and the fastening pattern is engineered for the specific tile profile. No caulk-only details on tile work — ever. The installation quality has to match the quality of the material, or the 50-year promise is just a number on a brochure.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
+      </div>
+      <div class="about-image">
+        <picture>
+          <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470039241_122125599908552346_4973791851142167865_n.jpg" alt="Clay tile roof installation on Grand Rapids Michigan home by Kamps Professional Roofing" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Kamps -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Why Kamps for Tile</span>
+      <h2>Rare Expertise in a Less Common Roofing Material</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div>
+          <h3>Structural Assessments Included</h3>
+          <p>Most contractors skip this or charge separately. Kamps evaluates framing before quoting — so the estimate you receive accounts for all required work, not just the tile itself.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div>
+          <h3>Michigan Climate Specification</h3>
+          <p>Not all tile is rated for freeze-thaw. Kamps specifies products with documented freeze-thaw cycling ratings appropriate for Grand Rapids winters — and installs them with methods that account for thermal movement.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div>
+          <h3>Long-Term Value Analysis</h3>
+          <p>Tile is more expensive upfront but cheaper per year over its lifespan. Daniel provides the 50-year cost comparison against asphalt so you can make the decision based on real numbers.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div>
+          <h3>Precision Installation on Premium Materials</h3>
+          <p>Tile is expensive — mistakes are expensive too. Daniel's 30+ years of experience with specialty roofing materials means the installation matches the quality of the product itself.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid-page CTA — CTA #2 -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Is Your Home Ready for a Tile Roof? Find Out Free.</h2>
+    <p>Kamps evaluates your framing during the estimate — no separate engineering fee. You get a complete picture before committing to anything.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Assessment</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
+    </div>
+  </div>
 </div>
 
-<!-- ── Intro / Answer Block ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="split" style="align-items: center; gap: var(--space-12);">
-
-            <div data-animate="fade-up">
-                <p class="eyebrow">Tile Roofing in Grand Rapids</p>
-                <h2>Tile Roofing Is Practical in Michigan — With the Right Installation</h2>
-                <div class="prose" style="margin-top: var(--space-6);">
-                    <p>Clay and concrete tile can last 50–100 years on a West Michigan home — but only when installed correctly for our climate. The biggest failure point with tile in Michigan isn't the tile itself; it's freeze-thaw damage from moisture infiltration when the product or installation isn't specified for northern conditions.</p>
-                    <p style="margin-top: var(--space-4);">A full tile roof installation in Grand Rapids runs <strong>$15,000–$35,000+</strong> depending on tile type and roof complexity. Before any number is finalized, Daniel Kamps evaluates the framing — tile weighs 3–4x more than asphalt shingles, and most homes require structural reinforcement before installation can begin. That assessment is included in your estimate, not billed separately.</p>
-                    <p style="margin-top: var(--space-4);">Tile is less common in West Michigan than shingles or metal, which means most contractors here don't have deep tile experience. Kamps is an exception — the knowledge to specify the right freeze-thaw rated product, prep the structure correctly, and install with methods that account for Michigan's temperature swings.</p>
-                </div>
-                <div style="margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap;">
-                    <a href="/contact" class="btn btn-primary">Get a Free Tile Estimate</a>
-                    <a href="/services/slate-roof-installation" class="btn btn-outline-white" style="color: var(--color-primary); border-color: var(--color-primary);">Compare: Slate Roofing</a>
-                </div>
-            </div>
-
-            <div class="img-reveal" data-animate="wipe-right" style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);">
-                <picture>
-                    <source srcset="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470039241_122125599908552346_4973791851142167865_n.jpg" type="image/jpeg">
-                    <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470039241_122125599908552346_4973791851142167865_n.jpg"
-                         alt="Clay tile roof installation on Grand Rapids Michigan home by Kamps Professional Roofing"
-                         width="700" height="500" loading="lazy">
-                </picture>
-            </div>
-
-        </div>
+<!-- Process Steps -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">How It Works</span>
+      <h2>Tile Roof Installation: From Assessment to Completion</h2>
     </div>
+    <div class="process-grid">
+      <div class="process-step" data-animate>
+        <div class="process-number">1</div>
+        <h3>Structural Assessment</h3>
+        <p>The framing is evaluated before any tile is ordered. If reinforcement is needed, the scope and cost are defined upfront — no change orders mid-project.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">2</div>
+        <h3>Tile Selection &amp; Ordering</h3>
+        <p>Clay or concrete, style, color, and freeze-thaw rating are confirmed. Only products rated for Michigan's climate are specified — not everything in the catalog qualifies.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">3</div>
+        <h3>Deck Reinforcement &amp; Prep</h3>
+        <p>Structural work is completed, old roofing removed, and the deck prepared with appropriate underlayment systems for tile — not standard shingle underlayment.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">4</div>
+        <h3>Tile Install &amp; Ridge Cap</h3>
+        <p>Tiles installed with proper fastening pattern, all hip and ridge tiles capped and mortared, every valley and penetration flashed with metal.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Clay vs Concrete Comparison ──────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Choosing Your Material</p>
-            <h2>Clay Tile vs. Concrete Tile — What's Right for Your Home?</h2>
-            <p class="prose-centered" style="margin-top: var(--space-4); text-align: center;">Both last 40–100 years. The difference is cost, weight, and aesthetics — Daniel walks you through both options during your free estimate.</p>
-        </div>
-
-        <div class="tile-compare" data-animate="fade-up">
-            <div class="tile-card">
-                <div class="tile-card-header">Concrete Tile</div>
-                <div class="tile-card-body">
-                    <ul>
-                        <li>More affordable than clay — better entry point</li>
-                        <li>Lighter than clay — less structural reinforcement needed</li>
-                        <li>Lifespan: 40–50 years in Michigan conditions</li>
-                        <li>Available in flat, low-profile, and barrel styles</li>
-                        <li>Color can fade over decades — recoating options available</li>
-                        <li>Good balance of performance and cost</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="tile-card">
-                <div class="tile-card-header accent-bg">Clay Tile — Premium Option</div>
-                <div class="tile-card-body">
-                    <ul>
-                        <li>Lifespan: 50–100 years — some clay roofs exceed a century</li>
-                        <li>Color is baked in — doesn't fade the way concrete can</li>
-                        <li>Heavier: more structural reinforcement typically required</li>
-                        <li>Fire resistant Class A — best rating available</li>
-                        <li>Premium aesthetic — adds significant curb appeal and value</li>
-                        <li>Higher upfront cost; lower long-term cost per year</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<!-- FAQ -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>What Michigan Homeowners Ask About Tile Roofing</h2>
     </div>
+    <div class="faq-grid">
+      <div class="faq-item" data-animate>
+        <h3>Is tile roofing practical in Michigan?</h3>
+        <p>Yes, with proper installation. The key is selecting freeze-thaw resistant tile — not all tile products are rated for Michigan's temperature swings. Kamps specifies products tested for northern climates and installs them with methods that account for thermal movement.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>How much does a tile roof cost in Grand Rapids?</h3>
+        <p>$15,000-$35,000+ depending on tile type and roof complexity. Clay is more expensive than concrete; both require a structural assessment before final pricing. Kamps includes that assessment in your estimate.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>How long do tile roofs last?</h3>
+        <p>Clay tile lasts 50-100 years; concrete tile typically 40-50 years. Both significantly outlast asphalt shingles. Lifespan depends on proper installation, adequate structural support, and correct flashing at all penetrations.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Mid-Page CTA Banner ───────────────────────────────────────────── -->
-<section class="cta-banner" aria-label="Request a free tile roofing estimate">
-    <div class="container" style="text-align: center;">
-        <p class="eyebrow" style="color: rgba(255,255,255,0.7);">Structural Assessment Included</p>
-        <h2 style="color: white; margin-bottom: var(--space-4);">Is Your Home Ready for a Tile Roof? Find Out Free.</h2>
-        <p style="color: rgba(255,255,255,0.85); max-width: 580px; margin: 0 auto var(--space-8); line-height: 1.6;">
-            Kamps evaluates your framing during the estimate — no separate engineering fee. You get a complete picture before committing to anything.
-        </p>
-        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-            <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Assessment</a>
-            <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Directly</a>
-        </div>
+<!-- Closing CTA — CTA #3 -->
+<section style="background: var(--color-dark); padding: 5rem 0;">
+  <div class="container" style="text-align: center;">
+    <h2 style="color: white; margin-bottom: 1rem;">Get a Complete Tile Roof Estimate in Grand Rapids</h2>
+    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">$15,000-$35,000+ installed. Framing evaluation included at no extra charge. Free estimate within 24-48 hours across Grand Rapids and Kent County.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
     </div>
-</section>
-
-<!-- ── Installation Process ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">How It Works</p>
-            <h2>Tile Roof Installation: From Assessment to Completion</h2>
-        </div>
-        <div class="process-grid" style="margin-top: var(--space-10);">
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">1</div>
-                <h3>Structural Assessment</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">The framing is evaluated before any tile is ordered. If reinforcement is needed, the scope and cost are defined upfront — no change orders mid-project.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">2</div>
-                <h3>Tile Selection &amp; Ordering</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Clay or concrete, style, color, and freeze-thaw rating are confirmed. Only products rated for Michigan's climate are specified — not everything in the catalog qualifies.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">3</div>
-                <h3>Deck Reinforcement &amp; Prep</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Structural work is completed, old roofing removed, and the deck prepared with appropriate underlayment systems for tile — not standard shingle underlayment.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">4</div>
-                <h3>Tile Install &amp; Ridge Cap</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Tiles installed with proper fastening pattern, all hip and ridge tiles capped and mortared, every valley and penetration flashed with metal — no caulk-only details on tile work.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Why Kamps ─────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Why Kamps for Tile</p>
-            <h2>Rare Expertise in a Less Common Roofing Material</h2>
-        </div>
-        <div class="why-grid" style="margin-top: var(--space-10);">
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Structural Assessments Included</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Most contractors skip this or charge separately. Kamps evaluates framing before quoting — so the estimate you receive accounts for all required work, not just the tile itself.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Michigan Climate Specification</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Not all tile is rated for freeze-thaw. Kamps specifies products with documented freeze-thaw cycling ratings appropriate for Grand Rapids winters — and installs them with methods that account for thermal movement.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Long-Term Value Analysis</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Tile is more expensive upfront but cheaper per year over its lifespan. Daniel provides the 50-year cost comparison against asphalt so you can make the decision based on real numbers.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Precision Installation on Premium Materials</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Tile is expensive — mistakes are expensive too. Daniel's 30+ years of experience with specialty roofing materials means the installation matches the quality of the product itself.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start;">
-            <div data-animate="fade-up">
-                <p class="eyebrow">Common Questions</p>
-                <h2>What Michigan Homeowners Ask About Tile Roofing Near Me</h2>
-                <p class="prose" style="margin-top: var(--space-4);">
-                    Tile roofing is less common in West Michigan than in southern states — which means homeowners have more questions. Here are the ones Daniel gets most often.
-                </p>
-                <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-text-light);">Last Updated: April 2026</p>
-                <a href="/contact" class="btn btn-primary" style="margin-top: var(--space-6);">Talk to Daniel About Tile</a>
-            </div>
-            <div class="faq-grid" data-animate="fade-up">
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Is tile roofing practical in Michigan?</div>
-                    <div class="faq-answer">Yes, with proper installation. The key is selecting freeze-thaw resistant tile — not all tile products are rated for Michigan's temperature swings. Kamps specifies products tested for northern climates and installs them with methods that account for thermal movement.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How much does a tile roof cost in Grand Rapids?</div>
-                    <div class="faq-answer">$15,000–$35,000+ depending on tile type and roof complexity. Clay is more expensive than concrete; both require a structural assessment before final pricing. Kamps includes that assessment in your estimate.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How long do tile roofs last?</div>
-                    <div class="faq-answer">Clay tile lasts 50–100 years; concrete tile typically 40–50 years. Both significantly outlast asphalt shingles. Lifespan depends on proper installation, adequate structural support, and correct flashing at all penetrations.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Does my home need structural reinforcement for tile?</div>
-                    <div class="faq-answer">Tile weighs 3–4x more than asphalt. Most homes need framing evaluation before tile can be installed. Kamps includes this assessment in every tile estimate — if reinforcement is needed, it's identified and priced upfront.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Closing CTA ───────────────────────────────────────────────────── -->
-<section class="closing-cta">
-    <div class="container" style="position: relative; z-index: 1;">
-        <div style="max-width: 680px; margin: 0 auto; text-align: center;" data-animate="fade-up">
-            <p class="eyebrow" style="color: var(--color-accent);">Built to Last Generations</p>
-            <h2 style="color: white; margin-bottom: var(--space-4);">Get a Complete Tile Roof Estimate — Structural Assessment Included</h2>
-            <p style="color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto var(--space-8); line-height: 1.65;">
-                $15,000–$35,000+ installed. Framing evaluation included at no extra charge. Free estimate within 24–48 hours across Grand Rapids and Kent County.
-            </p>
-            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Estimate</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps</a>
-            </div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: var(--space-6);">Licensed &amp; Insured · Grand Rapids, MI · Kent County &amp; West Michigan</p>
-        </div>
-    </div>
+  </div>
 </section>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

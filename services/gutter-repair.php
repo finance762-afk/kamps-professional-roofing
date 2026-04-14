@@ -26,39 +26,101 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-.inner-hero { position: relative; min-height: 55vh; display: flex; align-items: center; background-size: cover; background-position: center; padding-top: 80px; }
+.inner-hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
+}
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav { background: var(--color-light); padding: 0.75rem 0; border-bottom: 1px solid var(--color-gray-light); }
-.breadcrumb { display: flex; align-items: center; gap: 0.5rem; list-style: none; font-size: 0.875rem; }
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
-.process-step { text-align: center; padding: 2rem 1.5rem; background: var(--color-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
-.process-number { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); color: white; font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.process-step {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.process-number {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
 .process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
 .process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.why-item { display: flex; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }
-.why-icon { flex-shrink: 0; width: 48px; height: 48px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); display: flex; align-items: center; justify-content: center; color: white; }
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.why-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.why-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 .why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
 .why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
-.stat-overlay { position: absolute; bottom: -1.5rem; right: -1.5rem; background: linear-gradient(135deg, var(--color-primary), var(--color-accent)); color: white; border-radius: var(--radius-lg); padding: 1.25rem 1.75rem; text-align: center; box-shadow: var(--shadow-lg); }
-.stat-overlay .big-number { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; line-height: 1; }
-.stat-overlay .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; margin-top: 0.25rem; }
-.about-image { position: relative; }
-.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
-.faq-item { background: var(--color-white); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-card); border-left: 4px solid var(--color-accent); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.faq-item {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
+}
 .faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
 .faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
-@media (max-width: 1023px) { .process-grid { grid-template-columns: 1fr 1fr; } .faq-grid { grid-template-columns: 1fr; } }
-@media (max-width: 767px) { .why-grid { grid-template-columns: 1fr; } .stat-overlay { right: 0; bottom: -1rem; } }
-@media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
 </style>
 
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- INNER HERO — CTA #1 -->
+<!-- Hero — CTA #1 -->
 <section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-473600470_122132718890552346_3318289636169879185_n.jpg');">
   <div class="hero-overlay"></div>
   <div class="container">
@@ -71,32 +133,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
         <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
       </div>
       <div class="hero-trust">
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          Licensed &amp; Insured
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          Same-Week Appointments
-        </span>
-        <span class="hero-trust-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Free Estimates
-        </span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TICKER STRIP -->
-<div class="ticker-strip" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Same-Week Appointments</span><span>★★★★★</span><span>30+ Years Experience</span><span>Honest Repair vs. Replace Advice</span><span>Grand Rapids, MI</span><span>Licensed &amp; Insured</span><span>Free Estimates</span><span>★★★★★</span>
-    <span>Same-Week Appointments</span><span>★★★★★</span><span>30+ Years Experience</span><span>Honest Repair vs. Replace Advice</span><span>Grand Rapids, MI</span><span>Licensed &amp; Insured</span><span>Free Estimates</span><span>★★★★★</span>
-  </div>
-</div>
-
-<!-- SERVICE DETAIL -->
+<!-- Service Detail -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="about-split" data-animate>
@@ -105,32 +150,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
           <span class="eyebrow">Gutter Services</span>
           <h2>Stop the Leak, Find the Cause — Gutter Repairs That Actually Stick</h2>
         </div>
-        <p>Most gutter repairs in Grand Rapids run <strong>$100–$400</strong> for isolated issues like a leaking seam, a sagging section, or a disconnected downspout. Replacing a badly damaged section of gutter typically runs <strong>$200–$700</strong> depending on length and accessibility. Emergency repairs after storm damage or ice dam events are handled same-week — gutters failing during active rain events cause fascia rot and foundation problems that compound quickly.</p>
-        <p>West Michigan's freeze-thaw cycle is the primary driver of gutter failure. Overnight temperatures drop below freezing while afternoons warm up repeatedly from November through March. Water trapped inside gutter seams expands as it freezes, separating the joint sealant a fraction of a millimeter at a time until the seam fails entirely. This is why patching a seam from the outside without addressing how water is pooling there will fail again in 6–18 months — Kamps diagnoses the drainage problem first.</p>
-        <p>Common issues Kamps repairs in Grand Rapids homes: leaking miter corners at gutter angles, sagging sections where hangers have pulled from rotted fascia, holes and cracks from physical impact, downspouts that have separated at the elbow joints, gutters pitched the wrong direction so water pools instead of drains, and end caps that have worked loose. Each of these has a different fix — and misdiagnosing the problem is how you end up calling a second contractor.</p>
-        <p>If a repair will cost more than 40–50% of what new gutters would cost, Kamps will tell you that directly. Some systems are simply at the end of their service life, and patching them is throwing money into a losing situation. You'll get an honest answer either way — not a repair quote padded to make replacement seem unnecessary.</p>
-        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: April 2026</p>
+        <p>Most gutter repairs in Grand Rapids run <strong>$100-$400</strong> for isolated issues like a leaking seam, a sagging section, or a disconnected downspout. Replacing a badly damaged section of gutter typically runs <strong>$200-$700</strong> depending on length and accessibility. Emergency repairs after storm damage or ice dam events are handled same-week — gutters failing during active rain cause fascia rot and foundation problems that compound quickly.</p>
+        <p>West Michigan's freeze-thaw cycle is the primary driver of gutter failure. Overnight temperatures drop below freezing while afternoons warm up repeatedly from November through March. Water trapped inside gutter seams expands as it freezes, separating the joint sealant a fraction of a millimeter at a time until the seam fails entirely. This is why patching a seam from the outside without addressing how water is pooling there will fail again in 6-18 months — Kamps diagnoses the drainage problem first.</p>
+        <p>Common gutter repair issues Kamps handles in Grand Rapids homes: leaking miter corners at gutter angles, sagging sections where hangers have pulled from rotted fascia, holes and cracks from physical impact, downspouts that have separated at the elbow joints, gutters pitched the wrong direction so water pools instead of drains, and end caps that have worked loose. If a repair will cost more than 40-50% of what new gutters would cost, Kamps will tell you that directly — you'll get an honest answer, not a padded repair quote.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
       </div>
       <div class="about-image">
-        <picture>
-          <img
-            src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-473600470_122132718890552346_3318289636169879185_n.jpg"
-            alt="gutter repair work on a Grand Rapids Michigan residential home"
-            width="600"
-            height="450"
-            loading="lazy"
-            style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;">
-        </picture>
-        <div class="stat-overlay">
-          <div class="big-number">$100</div>
-          <div class="label">Repairs Starting At</div>
-        </div>
+        <picture><img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-473600470_122132718890552346_3318289636169879185_n.jpg" alt="gutter repair work on a Grand Rapids Michigan residential home" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;"></picture>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE KAMPS -->
+<!-- Why Choose Kamps -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -140,7 +172,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     <div class="why-grid">
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         </div>
         <div>
           <h3>Root-Cause Diagnosis Before Any Work</h3>
@@ -149,11 +181,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
         </div>
         <div>
           <h3>Honest About When Replacement Makes More Sense</h3>
-          <p>If your gutters are 25 years old and failing in multiple places, Kamps will tell you — a replacement quote from us will be less than you'd pay for repeated repairs over the next two years. That's a conversation you deserve to have upfront.</p>
+          <p>If your gutters are 25 years old and failing in multiple places, Kamps will tell you — a replacement quote will be less than you'd pay for repeated repairs over the next two years. That's a conversation you deserve to have upfront.</p>
         </div>
       </div>
       <div class="why-item" data-animate>
@@ -167,7 +199,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
       </div>
       <div class="why-item" data-animate>
         <div class="why-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <div>
           <h3>30+ Years Means No West Michigan Surprises</h3>
@@ -178,11 +210,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- CTA BANNER — mid-page CTA #2 -->
+<!-- Mid-page CTA — CTA #2 -->
 <div class="cta-banner">
   <div class="container">
     <h2>Gutter Leaking or Sagging? Get a Same-Week Repair Estimate.</h2>
-    <p>Failing gutters accelerate fascia rot and basement water problems. Call Kamps for a free diagnosis and written repair quote before the next rainstorm hits.</p>
+    <p>Failing gutters accelerate fascia rot and basement water problems. Call Kamps for a free diagnosis and written repair quote before the next rainstorm hits Grand Rapids.</p>
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
       <a href="/contact" class="btn btn-accent btn-lg">Get Your Free Estimate</a>
       <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
@@ -190,7 +222,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </div>
 
-<!-- PROCESS STEPS -->
+<!-- Process Steps -->
 <section style="background: var(--color-light); padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
@@ -222,21 +254,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- FAQ SECTION -->
+<!-- FAQ -->
 <section style="padding: var(--space-16) 0;">
   <div class="container">
     <div class="section-header" data-animate>
-      <span class="eyebrow">Common Questions</span>
+      <span class="eyebrow">Frequently Asked Questions</span>
       <h2>Questions About Gutter Repair in Grand Rapids</h2>
     </div>
     <div class="faq-grid">
       <div class="faq-item" data-animate>
-        <h3>Can I repair gutters myself?</h3>
-        <p>Basic tasks like cleaning gutters or resealing a single visible joint are DIY-accessible. But diagnosing why a seam keeps failing, why gutters are pulling from the fascia, or whether the pitch is correct requires experience with ladder work, drainage assessment, and gutter mechanics. Improper repairs on gutters — particularly at corners and downspout connections — often create worse leaks than the original problem.</p>
-      </div>
-      <div class="faq-item" data-animate>
         <h3>How much does gutter repair cost in Grand Rapids?</h3>
-        <p>Most isolated repairs — a leaking seam, a sagging hanger section, a hole, or a disconnected downspout elbow — run <strong>$100–$400</strong>. Replacing a damaged section of gutter runs <strong>$200–$700</strong> depending on length and material. Complex repairs involving fascia rot under the gutters can run higher since the root cause (the rotted wood) has to be addressed for the repair to last.</p>
+        <p>Most isolated repairs — a leaking seam, a sagging hanger section, a hole, or a disconnected downspout elbow — run <strong>$100-$400</strong>. Replacing a damaged section of gutter runs <strong>$200-$700</strong> depending on length and material. Complex repairs involving fascia rot under the gutters can run higher since the root cause has to be addressed for the repair to last.</p>
       </div>
       <div class="faq-item" data-animate>
         <h3>How do I know if my gutters need repair vs. replacement?</h3>
@@ -250,7 +278,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
   </div>
 </section>
 
-<!-- CLOSING CTA — CTA #3 -->
+<!-- Closing CTA — CTA #3 -->
 <section style="background: var(--color-dark); padding: 5rem 0;">
   <div class="container" style="text-align: center;">
     <h2 style="color: white; margin-bottom: 1rem;">Catch Gutter Problems Before They Become Foundation Problems</h2>

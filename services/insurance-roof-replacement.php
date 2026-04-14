@@ -36,11 +36,6 @@ $schemaMarkup = '[' . breadcrumb_schema($breadcrumbs) . ',' . service_schema(
         ],
         [
             '@type'          => 'Question',
-            'name'           => 'What documentation do I need for a roof insurance claim?',
-            'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'At minimum: photos of damage, the date of the storm event, and an inspection report. Kamps provides a professional damage documentation package — photos, written assessment, and a scope of damage — that insurance companies take seriously and adjusters can\'t easily dismiss.'],
-        ],
-        [
-            '@type'          => 'Question',
             'name'           => 'What if my insurance company lowballs my claim?',
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => 'Kamps communicates directly with adjusters on your behalf. If the initial scope is insufficient, Daniel can request a re-inspection, provide supplemental documentation, and advocate for the full scope needed to restore your roof to pre-storm condition. This is a normal part of the process.'],
         ],
@@ -57,561 +52,269 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
 ?>
 
 <style>
-/* ── Page-specific styles ─────────────────────────────────────────── */
 .inner-hero {
-    position: relative;
-    min-height: 55vh;
-    display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    padding-top: 80px;
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 80px;
 }
 .inner-hero .hero-content { text-align: left; max-width: 700px; }
-.breadcrumb-nav {
-    background: var(--color-light);
-    padding: 0.75rem 0;
-    border-bottom: 1px solid var(--color-gray-light);
-}
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    list-style: none;
-    font-size: 0.875rem;
-}
-.breadcrumb-item + .breadcrumb-item::before { content: '/'; color: var(--color-gray); }
-.breadcrumb-item a { color: var(--color-primary); }
-.breadcrumb-item.active { color: var(--color-gray); }
-
 .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .process-step {
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .process-number {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
 }
+.process-step h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-dark); }
+.process-step p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
 .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
 .why-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 .why-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: var(--radius-md);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
-.mistake-list {
-    display: grid;
-    gap: 1rem;
-    margin-top: var(--space-8);
+.why-item h3 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--color-dark); }
+.why-item p { font-size: 0.875rem; color: var(--color-gray); line-height: 1.5; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
 }
-.mistake-item {
-    display: flex;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    border-left: 4px solid var(--color-accent);
-}
-.mistake-number {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading);
-    font-weight: 800;
-    font-size: 0.9rem;
-    margin-top: 2px;
-}
-.claim-form-section {
-    background: var(--color-light);
-    padding: var(--space-16) 0;
-}
-.claim-form-wrapper {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: var(--space-10);
-    max-width: 780px;
-    margin: 0 auto;
-}
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
-}
-.form-group {
-    position: relative;
-    margin-bottom: var(--space-6);
-}
-.form-group label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    margin-bottom: var(--space-2);
-    font-family: var(--font-heading);
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1.5px solid var(--color-gray-light);
-    border-radius: var(--radius-md);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--color-text);
-    background: var(--color-white);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    outline: none;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.12);
-}
-.form-group textarea { min-height: 120px; resize: vertical; }
-.faq-grid { display: grid; gap: 1rem; }
 .faq-item {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  border-left: 4px solid var(--color-accent);
 }
-.faq-question {
-    padding: 1.25rem 1.5rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--color-primary);
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.faq-item h3 { font-size: 1rem; margin-bottom: 0.75rem; color: var(--color-dark); }
+.faq-item p { font-size: 0.9rem; color: var(--color-gray); line-height: 1.6; }
+@media (max-width: 1023px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
 }
-.faq-icon {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 800;
-    margin-top: 1px;
-}
-.faq-answer {
-    padding: 0 1.5rem 1.25rem 3.75rem;
-    font-size: 0.95rem;
-    line-height: 1.65;
-    color: var(--color-text-light);
-}
-.closing-cta {
-    background: var(--color-dark);
-    padding: var(--space-16) 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-.closing-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.06;
-    pointer-events: none;
-}
-@media (max-width: 768px) {
-    .process-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .claim-form-wrapper { padding: var(--space-6); }
+@media (max-width: 767px) {
+  .why-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
-    .process-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
 }
 </style>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────── -->
-<section class="inner-hero hero-overlay"
-         style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470681461_122127113786552346_8603661316175448269_n.jpg');"
-         aria-label="Insurance roof replacement service hero">
-    <div class="container">
-        <div class="hero-content">
-            <p class="hero-eyebrow eyebrow" data-animate="fade-up">Storm Damage &amp; Insurance Claims</p>
-            <h1 data-animate="fade-up">Insurance Roof Replacement<br><span style="color: var(--color-accent);">Grand Rapids, MI</span></h1>
-            <p class="hero-subtitle" data-animate="fade-up">
-                Daniel Kamps has guided hundreds of Grand Rapids homeowners through storm damage claims — documentation, adjuster meetings, and work that begins only when your claim is approved.
-            </p>
-            <div class="hero-buttons" data-animate="fade-up">
-                <a href="/contact" class="btn btn-accent btn-lg magnetic">Get a Free Storm Inspection</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Now</a>
-            </div>
-            <div class="hero-trust" data-animate="fade-up">
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    Licensed &amp; Insured
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                    Adjuster Experience — 30+ Years
-                </div>
-                <div class="hero-trust-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    No Upfront Cost Beyond Deductible
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Breadcrumb ───────────────────────────────────────────────────── -->
 <?php echo breadcrumb_nav($breadcrumbs); ?>
 
-<!-- ── Ticker Strip ─────────────────────────────────────────────────── -->
-<div class="ticker-strip" aria-hidden="true">
-    <div class="ticker-track">
-        <span>Hail Damage Claims</span><span class="ticker-sep">✦</span>
-        <span>Wind Damage Repair</span><span class="ticker-sep">✦</span>
-        <span>Adjuster Meetings</span><span class="ticker-sep">✦</span>
-        <span>Proper Damage Documentation</span><span class="ticker-sep">✦</span>
-        <span>Claim Advocacy</span><span class="ticker-sep">✦</span>
-        <span>No Work Until Claim Approved</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <span>Kent County</span><span class="ticker-sep">✦</span>
-        <!-- duplicate for seamless loop -->
-        <span>Hail Damage Claims</span><span class="ticker-sep">✦</span>
-        <span>Wind Damage Repair</span><span class="ticker-sep">✦</span>
-        <span>Adjuster Meetings</span><span class="ticker-sep">✦</span>
-        <span>Proper Damage Documentation</span><span class="ticker-sep">✦</span>
-        <span>Claim Advocacy</span><span class="ticker-sep">✦</span>
-        <span>No Work Until Claim Approved</span><span class="ticker-sep">✦</span>
-        <span>Grand Rapids, MI</span><span class="ticker-sep">✦</span>
-        <span>Kent County</span><span class="ticker-sep">✦</span>
+<!-- Hero — CTA #1 -->
+<section class="inner-hero" style="background-image: url('https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470681461_122127113786552346_8603661316175448269_n.jpg');">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kamps Professional Roofing</span>
+      <h1>Insurance Roof Replacement Grand Rapids, MI</h1>
+      <p class="hero-subtitle">Daniel Kamps handles storm damage claims from documentation through adjuster meetings to finished roof — your only cost is your deductible.</p>
+      <div class="hero-buttons">
+        <a href="/contact" class="btn btn-accent btn-lg">Get a Free Storm Inspection</a>
+        <?php echo phone_link('btn btn-outline-white btn-lg', 'Call Now'); ?>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Licensed &amp; Insured</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 30+ Years Experience</span>
+        <span class="hero-trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg> Free Estimates</span>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- Service Detail -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="about-split" data-animate>
+      <div class="about-content">
+        <div class="section-header" style="text-align:left; margin-bottom: 2rem;">
+          <span class="eyebrow">Storm Damage &amp; Insurance Claims</span>
+          <h2>Most Storm Damage Costs You Nothing Beyond Your Deductible — If the Claim Is Filed Correctly</h2>
+        </div>
+        <p>Hail, wind, and falling branches — standard homeowner's insurance covers most storm damage to your roof in Grand Rapids. The problem isn't coverage; it's documentation. Claims that arrive at an insurer with weak documentation get underpaid or denied. Daniel Kamps has spent 30+ years learning what adjusters need to see, how damage is photographed and described to maximize approved scope, and when to push back on an insufficient payout.</p>
+        <p>The insurance roof replacement process, done right: Daniel inspects your roof and provides a professional damage report with dated photos and a written scope. You file the claim. Daniel meets the adjuster on-site — this is the step most Kent County homeowners skip, and it's where scope gets cut. Once your insurer approves the work and releases funds, Kamps completes the replacement. Your out-of-pocket cost is your deductible — nothing more. The typical timeline from inspection to finished roof is 2-6 weeks depending on insurer workload.</p>
+        <p>Claims that come in weak — a few phone photos and "missing shingles" — get partial approvals. Kamps' documentation package includes systematic photos, a written damage assessment, and a defined scope that adjusters take seriously. When initial payouts fall short, Daniel files supplemental documentation and requests re-inspection. This is a normal part of the insurance process, not an escalation.</p>
+        <p>Kamps does not begin work until the claim is approved and funds are confirmed. Any contractor who pressures you to sign before approval is creating risk for you, not for them. That's not how Daniel has run insurance jobs in West Michigan for three decades.</p>
+        <p style="font-size: 0.8rem; color: var(--color-gray);">Last Updated: <?php echo date('F Y'); ?></p>
+      </div>
+      <div class="about-image">
+        <picture><img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470681461_122127113786552346_8603661316175448269_n.jpg" alt="storm damaged roof in Grand Rapids Michigan inspected by Kamps Professional Roofing for insurance claim" width="600" height="450" loading="lazy" style="border-radius: var(--radius-lg); width: 100%; object-fit: cover;"></picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Kamps -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Why Kamps</span>
+      <h2>Three Decades of Working Directly with Insurance Companies</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        </div>
+        <div>
+          <h3>Professional Damage Documentation</h3>
+          <p>Kamps provides a damage report that adjusters recognize as professional documentation — systematic photos, written assessment, and defined scope. This materially affects approved payout amounts.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div>
+          <h3>Daniel Meets the Adjuster on Your Roof</h3>
+          <p>Most homeowners let the adjuster inspect alone — and adjusters miss damage. Having Daniel on the roof pointing out hail strikes, granule loss, and flashing damage routinely adds scope that otherwise gets excluded.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div>
+          <h3>No Work Until Claim Approval — Period</h3>
+          <p>Kamps begins no work until your claim is approved and funds are confirmed. This protects you from liability if the claim is disputed and ensures the work is fully covered before a single shingle comes off.</p>
+        </div>
+      </div>
+      <div class="why-item" data-animate>
+        <div class="why-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div>
+          <h3>Written Scopes — No Surprise Bills</h3>
+          <p>Every project has a written scope matching the approved insurance work. You won't receive a bill for work not covered by your claim without explicit prior authorization. No hidden charges, no unapproved add-ons.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mid-page CTA — CTA #2 -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Get a Free Storm Damage Inspection — Before You File</h2>
+    <p>Daniel inspects your roof and provides a professional damage report at no charge. You'll have the documentation you need to file a complete, defensible insurance claim in Grand Rapids.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Inspection</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
+    </div>
+  </div>
 </div>
 
-<!-- ── Intro / Answer Block ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="split" style="align-items: center; gap: var(--space-12);">
-
-            <div class="img-reveal" data-animate="wipe-right" style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg);">
-                <picture>
-                    <source srcset="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470681461_122127113786552346_8603661316175448269_n.jpg" type="image/jpeg">
-                    <img src="https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/photos/1776176914927-470681461_122127113786552346_8603661316175448269_n.jpg"
-                         alt="Storm damaged roof in Grand Rapids Michigan inspected by Kamps Professional Roofing for insurance claim"
-                         width="700" height="500" loading="lazy">
-                </picture>
-            </div>
-
-            <div data-animate="fade-up">
-                <p class="eyebrow">Insurance Claims in Grand Rapids</p>
-                <h2>Most Storm Damage Costs You Nothing Beyond Your Deductible — If the Claim Is Filed Correctly</h2>
-                <div class="prose" style="margin-top: var(--space-6);">
-                    <p>Hail, wind, falling branches — standard homeowner's insurance covers most storm damage to your roof. The problem isn't coverage; it's documentation. Claims that arrive at an insurer with weak documentation get underpaid or denied. Daniel Kamps has spent 30+ years learning what adjusters need to see, how damage is photographed and described to maximize approved scope, and when to push back on an insufficient payout.</p>
-                    <p style="margin-top: var(--space-4);">The process, done right: Daniel inspects your roof and provides a professional damage report with dated photos and a written scope. You file the claim. Daniel meets the adjuster on-site — this is the step most homeowners skip, and it's where scope gets cut. Once your insurer approves the work and releases funds, Kamps completes the replacement. Your out-of-pocket cost is your deductible — nothing more.</p>
-                    <p style="margin-top: var(--space-4);">Kamps does not begin work until the claim is approved. Any contractor who asks you to sign a contract and "we'll handle the insurance" before approval is creating risk for you — not for them.</p>
-                </div>
-                <div style="margin-top: var(--space-8); display: flex; gap: var(--space-4); flex-wrap: wrap;">
-                    <a href="/contact" class="btn btn-primary">Get My Free Storm Inspection</a>
-                    <a href="/services/storm-damage-roof-repair" class="btn btn-outline-white" style="color: var(--color-primary); border-color: var(--color-primary);">Storm Damage Repairs</a>
-                </div>
-            </div>
-
-        </div>
+<!-- Process Steps -->
+<section style="background: var(--color-light); padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">How It Works</span>
+      <h2>From Storm Damage to Finished Roof — Step by Step</h2>
     </div>
+    <div class="process-grid">
+      <div class="process-step" data-animate>
+        <div class="process-number">1</div>
+        <h3>Free Inspection &amp; Documentation</h3>
+        <p>Daniel inspects the roof, photographs all damage systematically, and produces a written damage assessment — the documentation package your insurer needs to process a complete claim.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">2</div>
+        <h3>You File the Claim</h3>
+        <p>You file with your insurance company using the documentation package. Daniel walks you through exactly what to say and send so the claim goes in complete — not as a vague "storm damage" report.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">3</div>
+        <h3>Adjuster Meeting on the Roof</h3>
+        <p>Daniel meets the adjuster on your roof. Every damage point is shown and documented in real-time. If the initial scope falls short, supplemental documentation is filed immediately.</p>
+      </div>
+      <div class="process-step" data-animate>
+        <div class="process-number">4</div>
+        <h3>Work Begins on Approval</h3>
+        <p>Kamps begins work only after your claim is approved and funds are released. Your only out-of-pocket expense is your deductible. The replacement meets the same standards as any Kamps roof installation.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Common Mistakes ───────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Why Claims Get Underpaid</p>
-            <h2>The 3 Mistakes Grand Rapids Homeowners Make on Roof Claims</h2>
-            <p class="prose-centered" style="margin-top: var(--space-4); text-align: center;">These are the patterns Daniel sees repeatedly after hail and wind events across Kent County.</p>
-        </div>
-        <div class="mistake-list" style="max-width: 820px; margin: 0 auto;" data-animate="fade-up">
-            <div class="mistake-item">
-                <div class="mistake-number">1</div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Filing Without Professional Damage Documentation</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Homeowners submit a claim with a few phone photos and a description of "missing shingles." Adjusters approve a partial scope. Proper documentation — systematic photos, a written damage assessment by an experienced roofer, and a defined scope — results in a significantly larger approved claim.</p>
-                </div>
-            </div>
-            <div class="mistake-item">
-                <div class="mistake-number">2</div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Not Meeting the Adjuster on the Roof</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Most homeowners let the adjuster inspect alone. Adjusters miss damage. Having Daniel Kamps on the roof during the adjuster visit — pointing out hail strikes, granule loss patterns, and flashing damage — routinely adds scope that otherwise gets excluded from the approved work.</p>
-                </div>
-            </div>
-            <div class="mistake-item">
-                <div class="mistake-number">3</div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Accepting the First Payout Without Review</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Insurance companies issue initial payouts that often don't cover the full replacement cost. This isn't unusual — it's standard. The solution is a contractor who reviews the scope against the actual work required and requests a supplemental payment when the numbers don't match reality.</p>
-                </div>
-            </div>
-        </div>
+<!-- FAQ -->
+<section style="padding: var(--space-16) 0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>Insurance Roof Replacement Questions Grand Rapids Homeowners Ask</h2>
     </div>
+    <div class="faq-grid">
+      <div class="faq-item" data-animate>
+        <h3>Will filing a roof claim raise my insurance rates?</h3>
+        <p>Possibly — consult your agent to understand your specific policy terms before filing. That said, most major storm damage is worth filing regardless of rate impact. Delaying a legitimate claim can compound damage and reduce your payout if the insurer determines neglect contributed to worsening conditions.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>What if my insurance company lowballs my claim?</h3>
+        <p>Kamps communicates directly with adjusters on your behalf. If the initial scope is insufficient, Daniel requests a re-inspection, provides supplemental documentation, and advocates for the full scope needed to restore your roof to pre-storm condition. This is a normal, expected part of the insurance process in Grand Rapids — not an exceptional escalation.</p>
+      </div>
+      <div class="faq-item" data-animate>
+        <h3>How long does the insurance roof replacement process take?</h3>
+        <p>From the initial damage inspection to a completed roof typically takes <strong>2-6 weeks</strong>. Claim processing time depends on your insurer and their workload — after a widespread West Michigan hail event, insurers can take longer. Daniel keeps you informed at every stage of the process.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ── Mid-Page CTA Banner ───────────────────────────────────────────── -->
-<section class="cta-banner" aria-label="Request a free storm damage inspection">
-    <div class="container" style="text-align: center;">
-        <p class="eyebrow" style="color: rgba(255,255,255,0.7);">After the Storm</p>
-        <h2 style="color: white; margin-bottom: var(--space-4);">Get a Free Storm Damage Inspection — Before You File</h2>
-        <p style="color: rgba(255,255,255,0.85); max-width: 580px; margin: 0 auto var(--space-8); line-height: 1.6;">
-            Daniel inspects your roof and provides a professional damage report at no charge. You'll have the documentation you need to file a complete, defensible claim.
-        </p>
-        <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-            <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Inspection</a>
-            <a href="tel:" class="btn btn-outline-white btn-lg">Call Now — Same-Week Available</a>
-        </div>
+<!-- Closing CTA — CTA #3 -->
+<section style="background: var(--color-dark); padding: 5rem 0;">
+  <div class="container" style="text-align: center;">
+    <h2 style="color: white; margin-bottom: 1rem;">Every Day You Wait Is a Day Storm Damage Can Spread</h2>
+    <p style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem;">Free storm damage inspection. Professional documentation package. Adjuster meeting included. Work begins only when your claim is approved. Your deductible is your only out-of-pocket cost.</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Inspection</a>
+      <?php echo phone_link('btn btn-outline-white btn-lg'); ?>
     </div>
-</section>
-
-<!-- ── Installation Process ─────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-light);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">How It Works</p>
-            <h2>From Storm Damage to Finished Roof — Step by Step</h2>
-        </div>
-        <div class="process-grid" style="margin-top: var(--space-10);">
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">1</div>
-                <h3>Free Inspection &amp; Documentation</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Daniel inspects the roof, photographs all damage systematically, and produces a written damage assessment. This documentation package is what your insurer needs — not a call-center description.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">2</div>
-                <h3>You File the Claim</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">You file with your insurance company using the documentation package. Daniel walks you through exactly what to say and send. The claim goes in complete — not as a vague "storm damage" report.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">3</div>
-                <h3>Adjuster Meeting</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Daniel meets the adjuster on your roof. Every damage point is shown and documented in real-time. If the initial scope falls short, supplemental documentation is filed immediately — not weeks later.</p>
-            </div>
-            <div class="process-step" data-animate="fade-up">
-                <div class="process-number">4</div>
-                <h3>Work Begins on Approval</h3>
-                <p style="font-size: 0.9rem; color: var(--color-text-light); margin-top: var(--space-2);">Kamps begins work only after your claim is approved and funds are released. Your only out-of-pocket expense is your deductible. The replacement is completed to the same standards as any Kamps roof installation.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Why Kamps ─────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Adjuster Experience Matters</p>
-            <h2>Three Decades of Working Directly with Insurance Companies</h2>
-        </div>
-        <div class="why-grid" style="margin-top: var(--space-10);">
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Professional Damage Documentation</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Kamps provides a damage report that adjusters and insurance reviewers recognize as professional documentation — not a homeowner's photos. This materially affects approved scope and payout amounts.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Direct Adjuster Communication</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Daniel handles adjuster conversations directly. He knows the terminology, the process, and the negotiation points. Homeowners who navigate this alone routinely leave money on the table.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">No Work Until Approval — Period</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Kamps begins no work until your claim is approved and funds are confirmed. This protects you from liability if the claim is disputed and ensures the work is fully covered before a single shingle is removed.</p>
-                </div>
-            </div>
-            <div class="why-item" data-animate="fade-up">
-                <div class="why-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-                </div>
-                <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 0.4rem;">Written Scopes — No Surprises</h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Every project has a written scope matching the approved insurance work. Any changes require written authorization. You won't receive a bill for work not covered by your claim without explicit prior approval.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Contact Form ──────────────────────────────────────────────────── -->
-<section class="claim-form-section">
-    <div class="container">
-        <div class="section-header" data-animate="fade-up">
-            <p class="eyebrow">Start Here</p>
-            <h2>Request Your Free Storm Damage Inspection</h2>
-            <p class="prose-centered" style="margin-top: var(--space-4); text-align: center;">Tell Daniel what happened — hail, wind, falling tree — and when. He'll schedule the inspection within 24–48 hours.</p>
-        </div>
-        <div class="claim-form-wrapper" data-animate="fade-up">
-            <form action="<?php echo FORM_ACTION; ?>" method="POST" novalidate>
-                <?php echo form_hidden_fields(SITE_URL . '/thank-you', 'Kamps Professional Roofing — Insurance Roof Replacement Inquiry'); ?>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="ins-name">Your Name *</label>
-                        <input type="text" id="ins-name" name="name" placeholder="John Smith" required autocomplete="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="ins-phone">Phone Number *</label>
-                        <input type="tel" id="ins-phone" name="phone" placeholder="(616) 555-0100" required autocomplete="tel">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="ins-email">Email Address</label>
-                        <input type="email" id="ins-email" name="email" placeholder="you@email.com" autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="ins-address">Property Address *</label>
-                        <input type="text" id="ins-address" name="property_address" placeholder="123 Main St, Grand Rapids, MI" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="ins-damage-type">Type of Damage *</label>
-                        <select id="ins-damage-type" name="damage_type" required>
-                            <option value="" disabled selected>Select damage type</option>
-                            <option>Hail Damage</option>
-                            <option>Wind Damage</option>
-                            <option>Fallen Tree / Branch</option>
-                            <option>Multiple / Not Sure</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ins-storm-date">Approximate Storm Date</label>
-                        <input type="text" id="ins-storm-date" name="storm_date" placeholder="e.g. March 2026 or last week">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="ins-message">Anything else you'd like us to know?</label>
-                    <textarea id="ins-message" name="message" placeholder="Briefly describe what you noticed — missing shingles, leaks, dents, etc."></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                    Request My Free Storm Inspection
-                </button>
-                <p style="text-align: center; font-size: 0.8rem; color: var(--color-text-light); margin-top: var(--space-3);">No obligation. No upfront cost. Daniel responds within 24 hours.</p>
-            </form>
-        </div>
-    </div>
-</section>
-
-<!-- ── FAQ ──────────────────────────────────────────────────────────── -->
-<section style="padding: var(--space-16) 0; background: var(--color-white);">
-    <div class="container">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: start;">
-            <div data-animate="fade-up">
-                <p class="eyebrow">Common Questions</p>
-                <h2>What Grand Rapids Homeowners Ask About Insurance Roof Replacement Near Me</h2>
-                <p class="prose" style="margin-top: var(--space-4);">
-                    The insurance claim process is unfamiliar to most homeowners. These are the questions Daniel hears most often — answered directly.
-                </p>
-                <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-text-light);">Last Updated: April 2026</p>
-                <a href="/contact" class="btn btn-primary" style="margin-top: var(--space-6);">Ask Daniel Your Claim Question</a>
-            </div>
-            <div class="faq-grid" data-animate="fade-up">
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>Will filing a roof claim raise my insurance rates?</div>
-                    <div class="faq-answer">Possibly — consult your agent to understand your specific policy. That said, major storm damage is usually worth filing regardless. Delaying a legitimate claim can compound damage and reduce your payout if the insurer determines neglect contributed to worsening conditions.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>What documentation do I need for a roof insurance claim?</div>
-                    <div class="faq-answer">At minimum: photos of damage, the storm date, and an inspection report. Kamps provides a professional damage documentation package — systematic photos, a written assessment, and a defined scope — that insurance companies take seriously and adjusters can't easily dismiss.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>What if my insurance company lowballs my claim?</div>
-                    <div class="faq-answer">Kamps communicates directly with adjusters on your behalf. If the initial scope is insufficient, Daniel requests a re-inspection, provides supplemental documentation, and advocates for the full scope needed. This is a normal, expected part of the process — not an exceptional escalation.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question"><div class="faq-icon">Q</div>How long does the insurance roof replacement process take?</div>
-                    <div class="faq-answer">From initial inspection to a completed roof typically takes 2–6 weeks. Claim processing time depends on your insurer and their workload — after a widespread West Michigan hail event, insurers can take longer. Daniel keeps you informed throughout.</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ── Closing CTA ───────────────────────────────────────────────────── -->
-<section class="closing-cta">
-    <div class="container" style="position: relative; z-index: 1;">
-        <div style="max-width: 680px; margin: 0 auto; text-align: center;" data-animate="fade-up">
-            <p class="eyebrow" style="color: var(--color-accent);">Storm Damage? Don't Wait.</p>
-            <h2 style="color: white; margin-bottom: var(--space-4);">Every Day You Wait Is a Day the Damage Can Spread</h2>
-            <p style="color: rgba(255,255,255,0.75); max-width: 540px; margin: 0 auto var(--space-8); line-height: 1.65;">
-                Free storm damage inspection. Professional documentation package provided. Adjuster meeting included. Work begins only when your claim is approved. Your deductible is your only out-of-pocket cost.
-            </p>
-            <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
-                <a href="/contact" class="btn btn-accent btn-lg">Schedule My Free Inspection</a>
-                <a href="tel:" class="btn btn-outline-white btn-lg">Call Daniel Kamps Now</a>
-            </div>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: var(--space-6);">Licensed &amp; Insured · Grand Rapids, MI · Kent County &amp; West Michigan · Same-Week Inspections Available</p>
-        </div>
-    </div>
+  </div>
 </section>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>
