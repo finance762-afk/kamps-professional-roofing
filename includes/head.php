@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/site-config.php';
 /**
  * head.php — Kamps Professional Roofing
  * Shared <head> include — outputs DOCTYPE through <body> opening tag.
@@ -104,13 +105,16 @@ $isHomepage = ($currentPage === 'home');
 
   <!-- Google Analytics 4 — replace GA_MEASUREMENT_ID ──────── -->
   <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <?php if (!empty($ga4MeasurementId)): ?>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo htmlspecialchars($ga4MeasurementId, ENT_QUOTES, 'UTF-8'); ?>"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
+    gtag('config', '<?php echo htmlspecialchars($ga4MeasurementId, ENT_QUOTES, 'UTF-8'); ?>');
   </script>
+  <?php endif; ?>
   -->
 
 <?php if ($isHomepage): ?>
@@ -199,5 +203,6 @@ $isHomepage = ($currentPage === 'home');
   </script>
 <?php endif; ?>
 
+<?php require_once __DIR__ . '/edit-mode.php'; ?>
 </head>
 <body<?php echo $bodyClass ? ' class="' . htmlspecialchars($bodyClass, ENT_QUOTES, 'UTF-8') . '"' : ''; ?>>
