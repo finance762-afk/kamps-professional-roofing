@@ -19,7 +19,7 @@ define('SITE_STATE',         'MI');
 define('SITE_ZIP',           '49525');
 define('OWNER_NAME',         'Daniel Kamps');
 define('SITE_TAGLINE',       'Covering You with Excellence');
-define('FORM_ACTION',        'https://design.pageone.cloud/api/leads/kamps-professional-roofing');
+define('FORM_ACTION',        'https://db.pageone.cloud/functions/v1/leads/kamps-professional-roofing');
 define('LOGO_URL',           'https://db.pageone.cloud/storage/v1/object/public/client-assets/kamps-professional-roofing/logo/1776176882754-461430316_10233986853122130_3081695463203055235_n.jpg');
 define('SITE_INDUSTRY',      'roofing');
 
