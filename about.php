@@ -375,14 +375,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php';
     "postalCode": "49525",
     "addressCountry": "US"
   },
-  "areaServed": "West Michigan",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "87",
-    "bestRating": "5",
-    "worstRating": "1"
-  }
+  "areaServed": "West Michigan"
 }
 </script>
 <script type="application/ld+json">

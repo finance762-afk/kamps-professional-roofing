@@ -18,19 +18,6 @@ $useSwiper       = true;
 // ── Schema: AggregateRating + FAQPage ──────────────────────────────────────
 $schemaMarkup = json_encode([
   [
-    '@context'     => 'https://schema.org',
-    '@type'        => 'AggregateRating',
-    'itemReviewed' => [
-      '@type' => 'RoofingContractor',
-      'name'  => 'Kamps Professional Roofing',
-      'url'   => 'https://kampsprofessionalroofing.com',
-    ],
-    'ratingValue' => '4.9',
-    'reviewCount' => '87',
-    'bestRating'  => '5',
-    'worstRating' => '1',
-  ],
-  [
     '@context'   => 'https://schema.org',
     '@type'      => 'FAQPage',
     'mainEntity' => [
