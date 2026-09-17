@@ -275,7 +275,8 @@ $useVanillaTilt ??= false;
 
     </div><!-- /.container -->
 
-  </footer><!-- /.site-footer -->
+      <?php include __DIR__ . '/partner-badge.php'; ?>
+</footer><!-- /.site-footer -->
 
 
   <!-- ── Back-to-Top Button ─────────────────────────────────── -->
